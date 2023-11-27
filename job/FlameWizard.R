@@ -1,0 +1,1157 @@
+## FlameWizard - Data
+## FlameWizard - VMatrix
+FlameWizardCoreBase <- CoreBuilder(ActSkills=c("BlazingOrbitalFlame", "FlameDischarge", "InfinityFlameCircle", "SalamanderMischief",
+                                               CommonV("Wizard", "CygnusKnights")), 
+                                   ActSkillsLv=c(25, 25, 25, 25, 25, 1, 25, 25, 25), 
+                                   UsefulSkills=c("CombatOrders", "SharpEyes"), 
+                                   SpecSet=get(DPMCalcOption$SpecSet), 
+                                   VPassiveList=FlameWizardVPassive, 
+                                   VPassivePrior=FlameWizardVPrior, 
+                                   SelfBind=F)
+
+FlameWizardCore <- MatrixSet(PasSkills=FlameWizardCoreBase$PasSkills$Skills, 
+                             PasLvs=FlameWizardCoreBase$PasSkills$Lv, 
+                             PasMP=FlameWizardCoreBase$PasSkills$MP, 
+                             ActSkills=FlameWizardCoreBase$ActSkills$Skills, 
+                             ActLvs=FlameWizardCoreBase$ActSkills$Lv, 
+                             ActMP=FlameWizardCoreBase$ActSkills$MP, 
+                             UsefulSkills=FlameWizardCoreBase$UsefulSkills, 
+                             UsefulLvs=20, 
+                             UsefulMP=0, 
+                             SpecSet=get(DPMCalcOption$SpecSet), 
+                             SpecialCore=FlameWizardCoreBase$SpecialCoreUse)
+
+
+## FlameWizard - Basic Info
+## Wand - Staff Check Needed
+FlameWizardBase <- JobBase(ChrInfo=ChrInfo, 
+                           MobInfo=get(DPMCalcOption$MobSet),
+                           SpecSet=get(DPMCalcOption$SpecSet), 
+                           Job="FlameWizard",
+                           CoreData=FlameWizardCore, 
+                           BuffDurationNeeded=0, 
+                           AbilList=FindJob(get(paste(DPMCalcOption$SpecSet, "Ability", sep="")), "FlameWizard"), 
+                           LinkList=FindJob(get(paste(DPMCalcOption$SpecSet, "Link", sep="")), "FlameWizard"), 
+                           MonsterLife=get(FindJob(MonsterLifePreSet, "FlameWizard")[DPMCalcOption$MonsterLifeLevel][1, 1]), 
+                           Weapon=WeaponUpgrade(1, DPMCalcOption$WeaponSF, 4, 0, 0, 0, 0, 3, 0, 0, "Wand", get(DPMCalcOption$SpecSet)$WeaponType)[, 1:16],
+                           WeaponType=get(DPMCalcOption$SpecSet)$WeaponType, 
+                           SubWeapon=SubWeapon[rownames(SubWeapon)=="CygnusKnightsJewel", ], 
+                           Emblem=Emblem[rownames(Emblem)=="Cygnus", ], 
+                           CoolReduceHat=as.logical(FindJob(get(paste(DPMCalcOption$SpecSet, "CoolReduceHat", sep="")), "FlameWizard")))
+
+
+## FlameWizard - Passive
+{option <- factor(c("MainStat"), levels=PSkill)
+value <- c(floor(FlameWizardBase$ChrLv/2))
+ElementalHarmony <- data.frame(option, value)
+
+option <- factor(c("ATKP"), levels=PSkill)
+value <- c(10)
+ElementalExpert <- data.frame(option, value)
+
+option <- factor(c("CRR"), levels=PSkill)
+value <- c(5)
+InbornTalent <- data.frame(option, value) ## Wand Only
+
+option <- factor(c("ATK", "ATKSpeed"), levels=PSkill)
+value <- c(10, 1)
+SpellTraining <- data.frame(option, value)
+
+option <- factor(c("FDR"), levels=PSkill)
+value <- c(30)
+LiberatedMagic <- data.frame(option, value)
+
+option <- factor(c("CRR", "CDMR"), levels=PSkill)
+value <- c(30, 20)
+WeaknessResearch <- data.frame(option, value)
+
+option <- factor(c("MainStat"), levels=PSkill)
+value <- c(60)
+BrilliantEnlightenment <- data.frame(option, value)
+
+option <- factor(c("ATK", "FDR", "Mastery"), levels=PSkill)
+value <- c(20 + 2 * FlameWizardBase$PSkillLv, 50 + 3 * FlameWizardBase$PSkillLv, 70 + FlameWizardBase$PSkillLv)
+TruthofMagic <- data.frame(option, value)
+
+option <- factor(c("ATK"), levels=PSkill)
+value <- c(GetCoreLv(FlameWizardCore, "Blink"))
+BlinkPassive <- data.frame(option, value)
+
+option <- factor(c("MainStat", "SubStat1"), levels=PSkill)
+value <- c(rep(GetCoreLv(FlameWizardCore, "RopeConnect"), 2))
+RopeConnectPassive <- data.frame(option, value)}
+
+FlameWizardPassive <- Passive(list(ElementalHarmony=ElementalHarmony, ElementalExpert=ElementalExpert, InbornTalent=InbornTalent, SpellTraining=SpellTraining, 
+                                   LiberatedMagic=LiberatedMagic, WeaknessResearch=WeaknessResearch, BrilliantEnlightenment=BrilliantEnlightenment, TruthofMagic=TruthofMagic, BlinkPassive=BlinkPassive, 
+                                   RopeConnectPassive=RopeConnectPassive))
+
+
+## FlameWizard - Buff
+{option <- factor("ATK", levels=BSkill)
+value <- c(40 + FlameWizardBase$PSkillLv)
+info <- c(8, 9, 0, F, NA, NA, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+ElementFlame <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=BSkill)
+value <- c()
+info <- c(300, NA, 0, T, NA, NA, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+Ignition <- rbind(data.frame(option, value), info)
+
+option <- factor("ImmuneIgnore", levels=BSkill)
+value <- c(10)
+info <- c(10, 11, 0, F, NA, NA, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+IgnitionEffect <- rbind(data.frame(option, value), info)
+
+option <- factor(c("ATK", "ATKSpeed"), levels=BSkill)
+value <- c(20, 2)
+info <- c(300, NA, 0, T, NA, NA, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+BookofFire <- rbind(data.frame(option, value), info)
+
+option <- factor(c("IGR"), levels=BSkill)
+value <- c(30 + FlameWizardBase$SkillLv)
+info <- c(300 * (100 + FlameWizardBase$MonsterLife$SummonedDuration + FlameWizardBase$UnionChrs$SummonedDuration) / 100, NA, 420, F, NA, NA, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+SpiritofFlame <- rbind(data.frame(option, value), info)
+
+option <- factor(c("BDR", "ATKSpeed"), levels=BSkill)
+value <- c(60 + FlameWizardBase$SkillLv, 1)
+info <- c(30, 45, 1080, T, T, T, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+BurningRegion <- rbind(data.frame(option, value), info)
+
+option <- factor("MainStat", levels=BSkill)
+value <- c(floor((FlameWizardBase$ChrLv * 5 + 18) * (0.15 + 0.01 * ceiling(FlameWizardBase$SkillLv/2))))
+info <- c(900 + 30 * FlameWizardBase$SkillLv, NA, 0, T, NA, NA, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+MapleSoldier <- rbind(data.frame(option, value), info)
+
+option <- factor("BDR", levels=BSkill)
+value <- c(5)
+info <- c(120, 120, 0, F, F, F, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+GloryofGardians <- rbind(data.frame(option, value), info)
+
+Useful <- UsefulSkills(FlameWizardCore)
+UsefulSharpEyes <- Useful$UsefulSharpEyes
+UsefulCombatOrders <- Useful$UsefulCombatOrders
+if(sum(names(Useful)=="UsefulAdvancedBless") >= 1) {
+  UsefulAdvancedBless <- Useful$UsefulAdvancedBless
+}
+
+option <- factor("FDR", levels=BSkill)
+value <- c(8 + floor(GetCoreLv(FlameWizardCore, "OverloadMana")/10))
+info <- c(0, 1, 0, F, F, F, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+OverloadMana <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=BSkill)
+value <- c()
+info <- c(0, 1, 0, F, F, F, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeStack <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=BSkill)
+value <- c()
+info <- c(0, 1, 0, F, F, F, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+InfinityFlameCircleStack <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=BSkill)
+value <- c()
+info <- c(60, 90, 750, F, T, F, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+SalamanderMischief <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=BSkill)
+value <- c()
+info <- c(0, 1, 0, F, F, F, F)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+SalamanderMischiefStack <- rbind(data.frame(option, value), info)
+
+option <- factor("ATK", levels=BSkill)
+value <- c(45 + 2 * GetCoreLv(FlameWizardCore, "SalamanderMischief"))
+info <- c(30, 90, 0, F, T, F, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+SalamanderMischiefAfter <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=BSkill)
+value <- c()
+info <- c(45, 240, 630, F, T, F, T)
+info <- data.frame(BInfo, info)
+colnames(info) <- c("option", "value")
+BlessofCygnus <- rbind(data.frame(option, value), info)}
+
+FlameWizardBuff <- list(ElementFlame=ElementFlame, Ignition=Ignition, IgnitionEffect=IgnitionEffect, BookofFire=BookofFire, SpiritofFlame=SpiritofFlame, BurningRegion=BurningRegion, 
+                        MapleSoldier=MapleSoldier, GloryofGardians=GloryofGardians, UsefulSharpEyes=UsefulSharpEyes, UsefulCombatOrders=UsefulCombatOrders, 
+                        OverloadMana=OverloadMana, FlameDischargeStack=FlameDischargeStack, InfinityFlameCircleStack=InfinityFlameCircleStack, 
+                        SalamanderMischief=SalamanderMischief, SalamanderMischiefStack=SalamanderMischiefStack, SalamanderMischiefAfter=SalamanderMischiefAfter, 
+                        BlessofCygnus=BlessofCygnus, Restraint4=Restraint4, SoulContractLink=SoulContractLink)
+## PetBuff : Ignition(990ms), BookofFire(990ms), MapleSoldier(0ms), UsefulSharpEyes(900ms), UsefulCombatOrders(1500ms), (UsefulAdvancedBless)
+if(sum(names(Useful)=="UsefulAdvancedBless") >= 1) {
+  FlameWizardBuff[[length(FlameWizardBuff)+1]] <- UsefulAdvancedBless
+  names(FlameWizardBuff)[[length(FlameWizardBuff)]] <- "UsefulAdvancedBless"
+}
+FlameWizardBuff <- Buff(FlameWizardBuff)
+FlameWizardAllTimeBuff <- AllTimeBuff(FlameWizardBuff, WillBeAllTimeBuff = c("BurningRegion"))
+
+
+## FlameWizard - Union & HyperStat & SoulWeapon
+FlameWizardSpec <- JobSpec(JobBase=FlameWizardBase, 
+                          Passive=FlameWizardPassive, 
+                          AllTimeBuff=FlameWizardAllTimeBuff, 
+                          MobInfo=get(DPMCalcOption$MobSet), 
+                          SpecSet=get(DPMCalcOption$SpecSet), 
+                          WeaponName="Wand", 
+                          UnionStance=0,
+                          JobConstant=1.2)
+
+FlameWizardUnionRemained <- FlameWizardSpec$UnionRemained
+FlameWizardHyperStatBase <- FlameWizardSpec$HyperStatBase
+FlameWizardCoolReduceType <- FlameWizardSpec$CoolReduceType
+FlameWizardSpec <- FlameWizardSpec$Spec
+
+
+## FlameWizard - Spider In Mirror
+SIM <- SIMData(GetCoreLv(FlameWizardCore, "SpiderInMirror"))
+SpiderInMirror <- SIM$SpiderInMirror
+SpiderInMirrorStart <- SIM$SpiderInMirrorStart
+SpiderInMirror1 <- SIM$SpiderInMirror1
+SpiderInMirror2 <- SIM$SpiderInMirror2
+SpiderInMirror3 <- SIM$SpiderInMirror3
+SpiderInMirror4 <- SIM$SpiderInMirror4
+SpiderInMirror5 <- SIM$SpiderInMirror5
+SpiderInMirrorWait <- SIM$SpiderInMirrorWait
+
+
+## FlameWizard - Attacks
+OrbitalSubTime <- 240
+{option <- factor(c("IGR", "FDR"), levels=ASkill) 
+value <- c(IGRCalc(c(ifelse(GetCoreLv(FlameWizardCore, "OrbitalFlame")>=40, 20, 0), 20)), 2 * GetCoreLv(FlameWizardCore, "OrbitalFlame"))
+info <- c(330 + FlameWizardSpec$SkillLv - 90, 3, OrbitalSubTime, 150, NA, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+OrbitalFlame <- rbind(data.frame(option, value), info)
+
+option <- factor(c("IGR", "FDR"), levels=ASkill) 
+value <- c(ifelse(GetCoreLv(FlameWizardCore, "DragonSlave")>=40, 20, 0), 2 * GetCoreLv(FlameWizardCore, "DragonSlave"))
+info <- c(500, 6, 2000, 300, 90, F, F, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+DragonSlave <- rbind(data.frame(option, value), info)
+
+option <- factor(c("IGR", "FDR"), levels=ASkill) 
+value <- c(ifelse(GetCoreLv(FlameWizardCore, "DragonSlave")>=40, 20, 0), 2 * GetCoreLv(FlameWizardCore, "DragonSlave"))
+info <- c(500, 10, 810, NA, 90, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+DragonSlaveLast <- rbind(data.frame(option, value), info)
+
+option <- factor(c("IGR", "FDR"), levels=ASkill) 
+value <- c(ifelse(GetCoreLv(FlameWizardCore, "Infernorise")>=40, 20, 0), FDRCalc(c((2 * GetCoreLv(FlameWizardCore, "Infernorise")), 90 + FlameWizardSpec$SkillLv)))
+info <- c(350 + 3 * FlameWizardSpec$SkillLv, 10, 750, NA, 30, T, T, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+Infernorise <- rbind(data.frame(option, value), info)
+
+option <- factor(c("BDR", "IGR", "FDR"), levels=ASkill) 
+value <- c(20, ifelse(GetCoreLv(FlameWizardCore, "BlazingExtinction")>=40, 20, 0), 2 * GetCoreLv(FlameWizardCore, "BlazingExtinction"))
+info <- c(310 + 2 * FlameWizardSpec$SkillLv, 5, 870, 990, 5, T, T, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+BlazingExtinction <- rbind(data.frame(option, value), info)
+
+option <- factor(c("IGR"), levels=ASkill) 
+value <- c(50)
+info <- c(425 + 17 * GetCoreLv(FlameWizardCore, "BlazingOrbitalFlame"), 6, 210, 240, 5, T, T, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+BlazingOrbitalFlame <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=ASkill) 
+value <- c()
+info <- c(200 + 8 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 12, 840, 1, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeLion2 <- rbind(data.frame(option, value), info)
+
+option <- factor("FDR", levels=ASkill) 
+value <- c(35)
+info <- c(200 + 8 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 12, 840, 1, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeLion3 <- rbind(data.frame(option, value), info)
+
+option <- factor("FDR", levels=ASkill) 
+value <- c(FDRCalc(c(35, 35)))
+info <- c(200 + 8 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 12, 840, 1, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeLion4 <- rbind(data.frame(option, value), info)
+
+option <- factor("FDR", levels=ASkill) 
+value <- c(FDRCalc(c(35, 35, 35)))
+info <- c(200 + 8 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 12, 840, 1, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeLion5 <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=ASkill) 
+value <- c()
+info <- c(250 + 10 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 8, 840, 660, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeFox2 <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=ASkill) 
+value <- c()
+info <- c(250 + 10 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 8, 840, 660, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeFox3 <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=ASkill) 
+value <- c()
+info <- c(250 + 10 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 8, 840, 660, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeFox4 <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=ASkill) 
+value <- c()
+info <- c(250 + 10 * GetCoreLv(FlameWizardCore, "FlameDischarge"), 8, 840, 660, 20, T, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+FlameDischargeFox5 <- rbind(data.frame(option, value), info)
+
+option <- factor("IGR", levels=ASkill) 
+value <- c(50)
+info <- c(0, 0, 240, 0, NA, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+InfinityFlameCirclePrep <- rbind(data.frame(option, value), info)
+
+option <- factor("IGR", levels=ASkill) 
+value <- c(50)
+info <- c(550 + 22 * GetCoreLv(FlameWizardCore, "InfinityFlameCircle"), 8, 120, 0, NA, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+InfinityFlameCircleTick <- rbind(data.frame(option, value), info)
+
+option <- factor("IGR", levels=ASkill) 
+value <- c(50)
+info <- c(550 + 22 * GetCoreLv(FlameWizardCore, "InfinityFlameCircle"), 8, 180, 0, NA, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+InfinityFlameCircleEnd1 <- rbind(data.frame(option, value), info)
+
+option <- factor("IGR", levels=ASkill) 
+value <- c(50)
+info <- c(550 + 22 * GetCoreLv(FlameWizardCore, "InfinityFlameCircle"), 8, 220, 0, NA, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+InfinityFlameCircleEnd2 <- rbind(data.frame(option, value), info)
+
+option <- factor(levels=ASkill) 
+value <- c()
+info <- c(150 + 6 * GetCoreLv(FlameWizardCore, "SalamanderMischief"), 7, 0, 600, NA, NA, NA, F)
+info <- data.frame(AInfo, info)
+colnames(info) <- c("option", "value")
+SalamanderMischiefATK <- rbind(data.frame(option, value), info)}
+
+FlameWizardATK <- Attack(list(OrbitalFlame=OrbitalFlame, DragonSlave=DragonSlave, DragonSlaveLast=DragonSlaveLast, Infernorise=Infernorise, BlazingExtinction=BlazingExtinction, BlazingOrbitalFlame=BlazingOrbitalFlame, 
+                              FlameDischargeLion2=FlameDischargeLion2, FlameDischargeLion3=FlameDischargeLion3, FlameDischargeLion4=FlameDischargeLion4, FlameDischargeLion5=FlameDischargeLion5, 
+                              FlameDischargeFox2=FlameDischargeFox2, FlameDischargeFox3=FlameDischargeFox3, FlameDischargeFox4=FlameDischargeFox4, FlameDischargeFox5=FlameDischargeFox5,
+                              InfinityFlameCirclePrep=InfinityFlameCirclePrep, InfinityFlameCircleTick=InfinityFlameCircleTick, InfinityFlameCircleEnd1=InfinityFlameCircleEnd1, InfinityFlameCircleEnd2=InfinityFlameCircleEnd2, 
+                              SalamanderMischiefATK=SalamanderMischiefATK, SpiderInMirror=SpiderInMirror))
+
+
+## FlameWizard - Summoned
+{option <- factor(levels=SSkill)
+value <- c()
+info <- c(450 + 18 * GetCoreLv(FlameWizardCore, "CygnusPhalanx"), 1, 780, 240, 0.24 * (39 + GetCoreLv(FlameWizardCore, "CygnusPhalanx")) + 0.25, 30, F, T, F, F)
+info <- data.frame(SInfo, info)
+colnames(info) <- c("option", "value")
+CygnusPhalanx <- rbind(data.frame(option, value), info)}
+
+FlameWizardSummoned <- Summoned(list(CygnusPhalanx=CygnusPhalanx, SpiderInMirrorStart=SpiderInMirrorStart, SpiderInMirror1=SpiderInMirror1, SpiderInMirror2=SpiderInMirror2, 
+                                     SpiderInMirror3=SpiderInMirror3, SpiderInMirror4=SpiderInMirror4, SpiderInMirror5=SpiderInMirror5, SpiderInMirrorWait=SpiderInMirrorWait))
+
+
+## FlameWizard - DealCycle & Deal Calculation
+ATKFinal <- data.frame(FlameWizardATK)
+ATKFinal$Delay[c(-1, -2, -6, -15, -16, -17, -18)] <- Delay(ATKFinal$Delay, FlameWizardSpec$ATKSpeed)[c(-1, -2, -6, -15, -16, -17, -18)]
+ATKFinal$CoolTime <- Cooldown(ATKFinal$CoolTime, ATKFinal$CoolReduceAvailable, FlameWizardSpec$CoolReduceP, FlameWizardSpec$CoolReduce)
+
+BuffFinal <- data.frame(FlameWizardBuff)
+BuffFinal$CoolTime <- Cooldown(BuffFinal$CoolTime, BuffFinal$CoolReduceAvailable, FlameWizardSpec$CoolReduceP, FlameWizardSpec$CoolReduce)
+BuffFinal$Duration <- BuffFinal$Duration + BuffFinal$Duration * ifelse(BuffFinal$BuffDurationAvailable==T, FlameWizardSpec$BuffDuration / 100, 0) +
+  ifelse(BuffFinal$ServerLag==T, General$General$Serverlag, 0)
+
+SummonedFinal <- data.frame(FlameWizardSummoned)
+SummonedFinal$CoolTime <- Cooldown(SummonedFinal$CoolTime, SummonedFinal$CoolReduceAvailable, FlameWizardSpec$CoolReduceP, FlameWizardSpec$CoolReduce)
+SummonedFinal$Duration <- SummonedFinal$Duration + ifelse(SummonedFinal$SummonedDurationAvailable==T, SummonedFinal$Duration * FlameWizardSpec$SummonedDuration / 100, 0)
+
+
+## FlameWizard - Deal Cycle
+DealCycle <- c("Skills", "Time", rownames(FlameWizardBuff))
+FlameWizardDealCycle <- t(rep(0, length(DealCycle)))
+colnames(FlameWizardDealCycle) <- DealCycle
+FlameWizardDealCycle <- data.frame(FlameWizardDealCycle)
+
+FlameWizardCycle <- function(PreDealCycle, ATKFinal, BuffFinal, SummonedFinal, Spec, Period=180, CycleTime=360) {
+  BuffSummonedPrior <- c("Ignition", "BookofFire", "SpiritofFlame", "MapleSoldier", "GloryofGardians", "UsefulSharpEyes", "UsefulCombatOrders", "UsefulAdvancedBless", 
+                         "CygnusPhalanx", "SalamanderMischief", "BlessofCygnus", "BurningRegion")
+  Times180 <- c(0, 0, 0, 0, 0, 0, 0, 0, 
+                6, 2, 0.5, 4)
+  if(nrow(BuffFinal[rownames(BuffFinal)=="UsefulAdvancedBless", ]) == 0) {
+    Times180 <- Times180[BuffSummonedPrior!="UsefulAdvancedBless"]
+    BuffSummonedPrior <- BuffSummonedPrior[BuffSummonedPrior!="UsefulAdvancedBless"]
+  }
+  
+  SubTime <- rep(Period, length(BuffSummonedPrior))
+  TotalTime <- CycleTime
+  for(i in 1:length(BuffSummonedPrior)) {
+    SubTime[i] <- SubTime[i] / ifelse(Times180[i]==0, Inf, Times180[i])
+  }
+  
+  SubTimeUniques <- unique(SubTime)
+  SubTimeUniques <- SubTimeUniques[SubTimeUniques > 0]
+  TimeTypes <- c()
+  for(i in 1:length(SubTimeUniques)) {
+    Time <- 0 ; r <- 1
+    while(Time < TotalTime) {
+      Time <- SubTimeUniques[i] * r
+      r <- r + 1
+      TimeTypes <- c(TimeTypes, Time)
+    }
+  }
+  TimeTypes <- TimeTypes[TimeTypes < TotalTime]
+  TimeTypes <- unique(TimeTypes)
+  TimeTypes <- TimeTypes[order(TimeTypes)]
+  
+  Buffs <- data.frame(Buff=BuffSummonedPrior, SubTime=SubTime, stringsAsFactors=F)
+  Buffs <- subset(Buffs, Buffs$SubTime > 0)
+  
+  BuffList <- list()
+  BuffList[[1]] <- BuffSummonedPrior
+  for(i in 1:length(TimeTypes)) {
+    s <- c()
+    for(j in 1:nrow(Buffs)) {
+      if(round(TimeTypes[i] / Buffs[j, 2]) == TimeTypes[i] / Buffs[j, 2]) {
+        s <- c(s, Buffs[j, 1])
+      }
+    }
+    BuffList[[i+1]] <- s
+  }
+  
+  DelayDataB <- data.frame(Name=rownames(BuffFinal), Delay=BuffFinal$Delay)
+  DelayDataS <- data.frame(Name=rownames(SummonedFinal), Delay=SummonedFinal$Delay)
+  DelayData <- rbind(DelayDataB, DelayDataS)
+  
+  BuffDelays <- list()
+  for(i in 1:length(BuffList)) {
+    t <- c()
+    for(j in 1:length(BuffList[[i]])) {
+      for(k in 1:nrow(DelayData)) {
+        if(DelayData$Name[k]==BuffList[[i]][j]) {
+          t <- c(t, k)
+        }
+      }
+    }
+    BuffDelays[[i]] <- DelayData$Delay[t]
+  } 
+  
+  TotalTime <- TotalTime * 1000
+  DealCycle <- PreDealCycle
+  for(i in 1:length(BuffList[[1]])) {
+    if(sum(rownames(BuffFinal)==BuffList[[1]][i]) > 0) {
+      DealCycle <- DCBuff(DealCycle, BuffList[[1]][i], BuffFinal)
+    } else {
+      DealCycle <- DCSummoned(DealCycle, BuffList[[1]][i], SummonedFinal)
+      if(BuffList[[1]][i]=="CygnusPhalanx") {
+        DealCycle <- DCATK(DealCycle, "SpiderInMirror", ATKFinal)
+      }
+    }
+  }
+  
+  SubTimeList <- data.frame(Skills=BuffSummonedPrior, SubTime=SubTime, stringsAsFactors=F)
+  NoSubTime <- subset(SubTimeList, SubTimeList$SubTime==0)$Skills
+  NoSubTimeBuff <- c()
+  for(i in 1:length(NoSubTime)) {
+    NoSubTimeBuff <- c(NoSubTimeBuff, NoSubTime[i])
+  }
+  ColNums <- c()
+  for(i in 1:length(NoSubTimeBuff)) {
+    for(j in 1:length(colnames(DealCycle))) {
+      if(NoSubTimeBuff[i]==colnames(DealCycle)[j]) {
+        ColNums[i] <- j
+      }
+    }
+  }
+  BuffList[[length(BuffList)+1]] <- BuffList[[1]]
+  BuffDelays[[length(BuffDelays)+1]] <- BuffDelays[[1]]
+  DragonSlaveCool <- 90000 ; InfernoCool <- subset(ATKFinal, rownames(ATKFinal)=="Infernorise")$CoolTime * 1000
+  DischargeCool <- subset(ATKFinal, rownames(ATKFinal)=="FlameDischargeLion2")$CoolTime * 1000 + 3000
+  BlazingCool <- subset(ATKFinal, rownames(ATKFinal)=="BlazingOrbitalFlame")$CoolTime * 1000
+  ExtinctionCool <- 9500
+  SoulContractCool <- subset(BuffFinal, rownames(BuffFinal)=="SoulContractLink")$CoolTime * 1000
+  DragonSlaveRemain <- 0 ; InfernoRemain <- 0 ; DischargeRemain <- 0 ; BlazingRemain <- 0 ; ExtinctionRemain <- 0 ; SoulContractRemain <- 0
+  DealCycle$FlameDischargeStack[nrow(DealCycle)] <- 0
+  DC2 <- data.frame()
+  
+  DC2Control <- function(DC2) {
+    DC2 <- DC2[order(DC2$Time), ] 
+    rownames(DC2) <- 1:nrow(DC2)
+    DC2$IgnitionEffect[1] <- 10000
+    DC2$FlameDischargeStack[1] <- 2
+    
+    if(nrow(DC2) >=2) {
+      for(i in 2:nrow(DC2)) {
+        if(max(DC2$Skills[i]==c("BlazingOrbitalFlame", "OrbitalFlame", "InfinityFlameCircleTick", "BlazingExtinction"))==1) {
+          if(max(0, DC2$IgnitionEffect[i-1] - (DC2$Time[i] - DC2$Time[i-1]))==0) {
+            DC2$IgnitionEffect[i] <- 10000
+            DC2$FlameDischargeStack[i] <- min(6, DC2$FlameDischargeStack[i-1] + 1)
+          } else {
+            DC2$IgnitionEffect[i] <- max(0, DC2$IgnitionEffect[i-1] - (DC2$Time[i] - DC2$Time[i-1]))
+            DC2$FlameDischargeStack[i] <- DC2$FlameDischargeStack[i-1]
+          }
+        } else if(max(DC2$Skills[i]==c("DragonSlaveLast", "Infernorise"))==1) {
+          DC2$IgnitionEffect[i] <- 0
+          DC2$FlameDischargeStack[i] <- DC2$FlameDischargeStack[i-1]
+        } else if(max(DC2$Skills[i]==c("FlameDischargeFox2", "FlameDischargeLion2"))==1) {
+          DC2$IgnitionEffect[i] <- max(0, DC2$IgnitionEffect[i-1] - (DC2$Time[i] - DC2$Time[i-1]))
+          DC2$FlameDischargeStack[i] <- 0
+        }
+      }
+    }
+    return(DC2)
+  }
+  
+  for(k in 2:length(BuffList)) {
+    CycleBuffList <- data.frame(Skills=BuffList[[k]], Delay=BuffDelays[[k]])
+    BuffEndTime <- c()
+    for(i in 1:length(BuffList[[k]])) {
+      a <- subset(DealCycle, BuffList[[k]][i]==DealCycle$Skills)
+      a <- rbind(a, subset(DealCycle, paste(BuffList[[k]][i], "Summoned", sep="")==DealCycle$Skills))
+      for(j in 1:nrow(CycleBuffList)) {
+        if(CycleBuffList$Skills[j]==BuffList[[k]][i]) {
+          Idx <- j
+          break
+        }
+      }
+      BuffEndTime[i] <- max(a$Time) + subset(SubTimeList, SubTimeList$Skills==BuffList[[k]][i])$SubTime * 1000 + 
+        sum(CycleBuffList$Delay[Idx:nrow(CycleBuffList)])
+    }
+    BuffEndTime <- max(BuffEndTime)
+    BuffStartTime <- BuffEndTime - sum(CycleBuffList$Delay)
+    while(DealCycle$Time[nrow(DealCycle)] + DealCycle$Time[1] < BuffStartTime) {
+      for(i in 1:length(ColNums)) {
+        if(DealCycle[nrow(DealCycle), ColNums[i]] - DealCycle$Time[1] < 3000) {
+          DealCycle <- DCBuff(DealCycle, colnames(DealCycle)[ColNums[i]], BuffFinal)
+          ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+          DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+          InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+          DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+          BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+          SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        }
+      }
+      if(nrow(DC2)==0) {
+        DC2SS <- data.frame(IgnitionEffect=0, FlameDischargeStack=0)
+      } else {
+        DC2SS <- subset(DC2, DC2$Time < (DealCycle$Time[nrow(DealCycle)] + DealCycle$Time[1]))
+      }
+      ## Dragon Slave + Orbital Flame
+      if(DC2SS$IgnitionEffect[nrow(DC2SS)] > 0 & DragonSlaveRemain==0) {
+        DealCycle <- DCATK(DealCycle, "DragonSlave", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        DealCycle <- DCATK(DealCycle, "DragonSlaveLast", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- DragonSlaveCool - DealCycle$Time[1]
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- DealCycle[nrow(DealCycle), ]
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+        }
+        DC2 <- DC2Control(DC2)
+        
+        DealCycle <- DCATK(DealCycle, "OrbitalFlame", ATKFinal)
+        DealCycle$ElementFlame[nrow(DealCycle)] <- 8000
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        }
+        DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-1)] + 360
+        DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 150
+        DC2 <- DC2Control(DC2)
+      }  
+      ## Infernorise + Orbital Flame
+      else if(DC2SS$IgnitionEffect[nrow(DC2SS)] >= 9800 & InfernoRemain==0) {
+        DealCycle <- DCATK(DealCycle, "Infernorise", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        InfernoRemain <- InfernoCool - DealCycle$Time[1]
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- DealCycle[nrow(DealCycle), ]
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+        }
+        DC2 <- DC2Control(DC2)
+        
+        DealCycle <- DCATK(DealCycle, "OrbitalFlame", ATKFinal)
+        DealCycle$ElementFlame[nrow(DealCycle)] <- 8000
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        }
+        DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-1)] + 360
+        DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 150
+        DC2 <- DC2Control(DC2)
+      }  
+      ## Flame Discharge
+      else if(DC2SS$FlameDischargeStack[nrow(DC2SS)] >= 3 & DischargeRemain < 3000) {
+        DealCycle <- DCATK(DealCycle, "FlameDischargeFox2", ATKFinal)
+        DealCycle$FlameDischargeStack[nrow(DealCycle)] <- DC2SS$FlameDischargeStack[nrow(DC2SS)]
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DischargeRemain <- DischargeCool - DealCycle$Time[1]
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- DealCycle[nrow(DealCycle), ]
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+        }
+        DC2 <- DC2Control(DC2)
+      }  
+      else if(DC2SS$FlameDischargeStack[nrow(DC2SS)] >= 2 & DischargeRemain == 0) {
+        DealCycle <- DCATK(DealCycle, "FlameDischargeFox2", ATKFinal)
+        DealCycle$FlameDischargeStack[nrow(DealCycle)] <- DC2SS$FlameDischargeStack[nrow(DC2SS)]
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DischargeRemain <- DischargeCool - DealCycle$Time[1]
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- DealCycle[nrow(DealCycle), ]
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+        }
+        DC2 <- DC2Control(DC2)
+      }  
+      ## Infinity Flame Circle + Blazing Orbital Flame + Soul Contract
+      else if(DealCycle$InfinityFlameCircleStack[nrow(DealCycle)]==0 & DealCycle$BlessofCygnus[nrow(DealCycle)] - DealCycle$Time[1] <= 15000 & DealCycle$BlessofCygnus[nrow(DealCycle)] - DealCycle$Time[1] > 0 & 
+              BlazingRemain == 0 | 
+              DealCycle$InfinityFlameCircleStack[nrow(DealCycle)]==0 & nrow(subset(DealCycle, DealCycle$Skills=="Restraint4"))==1 & sum(nrow(subset(DealCycle, DealCycle$Skills=="InfinityFlameCirclePrep"))==c(2)) >= 1 & 
+              BlazingRemain == 0) {
+        DealCycle <- DCBuff(DealCycle, "SoulContractLink", BuffFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractCool - DealCycle$Time[1])
+        
+        DealCycle <- DCBuff(DealCycle, "Restraint4", BuffFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        DealCycle <- DCATK(DealCycle, "BlazingOrbitalFlame", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- BlazingCool - DealCycle$Time[1]
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        }
+        DC2$Time[(nrow(DC2)-3)] <- DC2$Time[(nrow(DC2)-3)] + 150
+        DC2$Time[(nrow(DC2)-2)] <- DC2$Time[(nrow(DC2)-3)] + 240
+        DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-2)] + 1590
+        DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 240
+        DC2 <- DC2Control(DC2)
+        
+        DealCycle <- DCATK(DealCycle, "InfinityFlameCirclePrep", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        DealCycle$InfinityFlameCircleStack[nrow(DealCycle)] <- 60000 + 120
+        
+        for(i in 1:75) {
+          DealCycle <- DCATK(DealCycle, "InfinityFlameCircleTick", ATKFinal)
+          if(nrow(DC2)==0) {
+            DC2 <- DealCycle[nrow(DealCycle), ]
+          } else {
+            DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+          }
+          DC2 <- DC2Control(DC2)
+          ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+          DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+          InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+          DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+          BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+          SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        }
+        
+        DealCycle <- DCATK(DealCycle, "InfinityFlameCircleEnd1", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+      }  
+      else if(DealCycle$InfinityFlameCircleStack[nrow(DealCycle)]==0 & sum(nrow(subset(DealCycle, DealCycle$Skills=="InfinityFlameCirclePrep"))==c(1, 3)) >= 1) {
+        DealCycle <- DCATK(DealCycle, "InfinityFlameCirclePrep", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        DealCycle$InfinityFlameCircleStack[nrow(DealCycle)] <- 120000 + 120
+        
+        for(i in 1:33) {
+          DealCycle <- DCATK(DealCycle, "InfinityFlameCircleTick", ATKFinal)
+          if(nrow(DC2)==0) {
+            DC2 <- DealCycle[nrow(DealCycle), ]
+          } else {
+            DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+          }
+          DC2 <- DC2Control(DC2)
+          ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+          DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+          InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+          DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+          BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+          SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        }
+        
+        DealCycle <- DCATK(DealCycle, "InfinityFlameCircleEnd2", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+      }
+      ## Soul Contract
+      else if(nrow(subset(DealCycle, DealCycle$Skills=="SoulContractLink")) < nrow(subset(DealCycle, DealCycle$Skills=="Restraint4")) * 2 & SoulContractRemain == 0) {
+        DealCycle <- DCBuff(DealCycle, "SoulContractLink", BuffFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractCool - DealCycle$Time[1])
+      }
+      ## Blazing Orbital Flame
+      else if(BlazingRemain == 0) {
+        DealCycle <- DCATK(DealCycle, "BlazingOrbitalFlame", ATKFinal)
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- BlazingCool - DealCycle$Time[1]
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        }
+        DC2$Time[(nrow(DC2)-3)] <- DC2$Time[(nrow(DC2)-3)] + 150
+        DC2$Time[(nrow(DC2)-2)] <- DC2$Time[(nrow(DC2)-3)] + 240
+        DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-2)] + 1590
+        DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 240
+        DC2 <- DC2Control(DC2)
+      } 
+      ## Blazing Extinction
+      else if(ExtinctionRemain == 0) {
+        DealCycle <- DCATK(DealCycle, "BlazingExtinction", ATKFinal)
+        ExtinctionRemain <- ExtinctionCool - DealCycle$Time[1]
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- DealCycle[nrow(DealCycle), ]
+          DC2$Time[nrow(DC2)] <- DC2$Time[nrow(DC2)] + 1500
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+          DC2$Time[nrow(DC2)] <- DC2$Time[nrow(DC2)] + 1500
+        }
+        for(i in 1:8) {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ])
+          DC2$Time[nrow(DC2)] <- DC2$Time[nrow(DC2)-1] + 990
+        }
+        DC2 <- DC2Control(DC2)
+      } 
+      ## Orbital Flame
+      else {
+        DealCycle <- DCATK(DealCycle, "OrbitalFlame", ATKFinal)
+        DealCycle$ElementFlame[nrow(DealCycle)] <- 8000
+        ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+        DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+        InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+        DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+        BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+        SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        
+        if(nrow(DC2)==0) {
+          DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        } else {
+          DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+        }
+        DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-1)] + 360
+        DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 150
+        DC2 <- DC2Control(DC2)
+      }
+    }
+    
+    if(k != length(BuffList)) {
+      for(i in 1:length(BuffList[[k]])) {
+        if(sum(rownames(BuffFinal)==BuffList[[k]][i]) > 0) {
+          DealCycle <- DCBuff(DealCycle, BuffList[[k]][i], BuffFinal)
+          ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+          DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+          InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+          DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+          BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+          SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        } else {
+          DealCycle <- DCSummoned(DealCycle, BuffList[[k]][i], SummonedFinal)
+          ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+          DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+          InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+          DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+          BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+          SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+        }
+      }
+    }
+  }
+  
+  while(DC2$FlameDischargeStack[nrow(DC2)] < 2 |
+        (DealCycle$Time[nrow(DealCycle)] - max(subset(DealCycle, DealCycle$Skills=="DragonSlaveLast")$Time) + 
+         min(subset(DealCycle, DealCycle$Skills=="DragonSlave")$Time)) < 90000) {
+    if(BlazingRemain == 0 & 
+       (DealCycle$Time[nrow(DealCycle)] - max(subset(DealCycle, DealCycle$Skills=="DragonSlaveLast")$Time) + 
+        min(subset(DealCycle, DealCycle$Skills=="DragonSlave")$Time)) < 89000) {
+      DealCycle <- DCATK(DealCycle, "BlazingOrbitalFlame", ATKFinal)
+      ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+      DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+      InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+      DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+      BlazingRemain <- BlazingCool - DealCycle$Time[1]
+      SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+      
+      if(nrow(DC2)==0) {
+        DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+      } else {
+        DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+      }
+      DC2$Time[(nrow(DC2)-3)] <- DC2$Time[(nrow(DC2)-3)] + 150
+      DC2$Time[(nrow(DC2)-2)] <- DC2$Time[(nrow(DC2)-3)] + 240
+      DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-2)] + 1590
+      DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 240
+      DC2 <- DC2Control(DC2)
+    } 
+    else {
+      DealCycle <- DCATK(DealCycle, "OrbitalFlame", ATKFinal)
+      DealCycle$ElementFlame[nrow(DealCycle)] <- 8000
+      ExtinctionRemain <- max(0, ExtinctionRemain - DealCycle$Time[1])
+      DragonSlaveRemain <- max(0, DragonSlaveRemain - DealCycle$Time[1])
+      InfernoRemain <- max(0, InfernoRemain - DealCycle$Time[1])
+      DischargeRemain <- max(0, DischargeRemain - DealCycle$Time[1])
+      BlazingRemain <- max(0, BlazingRemain - DealCycle$Time[1])
+      SoulContractRemain <- max(0, SoulContractRemain - DealCycle$Time[1])
+      
+      if(nrow(DC2)==0) {
+        DC2 <- rbind(DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+      } else {
+        DC2 <- rbind(DC2, DealCycle[nrow(DealCycle), ], DealCycle[nrow(DealCycle), ])
+      }
+      DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-1)] + 360
+      DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 150
+      DC2 <- DC2Control(DC2)
+    }
+  }
+  
+  DealCycle <- DealCycleFinal(DealCycle)
+  return(DealCycle)
+}
+FlameWizardAddATK <- function(DealCycle, ATKFinal, SummonedFinal, FlameWizardCore) {
+  for(i in 1:nrow(DealCycle)) {
+    if(DealCycle$Skills[i]=="FlameDischargeFox2") {
+      DealCycle$Skills[i] <- paste("FlameDischargeFox", DealCycle$FlameDischargeStack[i], sep="")
+    } else if(DealCycle$Skills[i]=="FlameDischargeLion2") {
+      DealCycle$Skills[i] <- paste("FlameDischargeLion", DealCycle$FlameDischargeStack[i], sep="")
+    }
+  }
+  
+  ## AddATKs
+  DealCycle <- RepATKCycle(DealCycle, "DragonSlave", 7, 0, ATKFinal)
+  DealCycle <- RepATKCycle(DealCycle, "OrbitalFlame", 2, 360, ATKFinal)
+  DealCycle <- RepATKCycle(DealCycle, "FlameDischargeFox2", 8, 660, ATKFinal)
+  DealCycle <- RepATKCycle(DealCycle, "FlameDischargeFox3", 10, 660, ATKFinal)
+  DealCycle <- RepATKCycle(DealCycle, "FlameDischargeFox4", 12, 660, ATKFinal)
+  DealCycle <- RepATKCycle(DealCycle, "FlameDischargeFox5", 14, 660, ATKFinal)
+  DealCycle <- RepATKCycle(DealCycle, "BlazingExtinction", 9, 1500, ATKFinal)
+  
+  ## Blazing Orbital Flame
+  DC2 <- data.frame()
+  for(i in 1:nrow(DealCycle)) {
+    if(DealCycle$Skills[i]=="BlazingOrbitalFlame") {
+      if(nrow(DC2)==0) {
+        DC2 <- rbind(DealCycle[i, ], DealCycle[i, ], DealCycle[i, ], DealCycle[i, ])
+      } else {
+        DC2 <- rbind(DC2, DealCycle[i, ], DealCycle[i, ], DealCycle[i, ], DealCycle[i, ])
+      }
+      DealCycle$Skills[i] <- "BlazingOrbitalFlameStart"
+      DC2$Time[(nrow(DC2)-3)] <- DC2$Time[(nrow(DC2)-3)] + 150
+      DC2$Time[(nrow(DC2)-2)] <- DC2$Time[(nrow(DC2)-3)] + 240
+      DC2$Time[(nrow(DC2)-1)] <- DC2$Time[(nrow(DC2)-2)] + 1590
+      DC2$Time[nrow(DC2)] <- DC2$Time[(nrow(DC2)-1)] + 240
+    }
+  }
+  DealCycle <- rbind(DealCycle, DC2)
+  DealCycle <- DealCycle[order(DealCycle$Time), ] 
+  rownames(DealCycle) <- 1:nrow(DealCycle)
+  for(i in 1:nrow(DealCycle)) {
+    if("BlazingOrbitalFlame"==DealCycle[i, 1]) {
+      DealCycle[i, 3:ncol(DealCycle)] <- DealCycle[i-1, 3:ncol(DealCycle)] - (DealCycle[i, 2] - DealCycle[i-1, 2])
+      DealCycle[i, 3:ncol(DealCycle)] <- ifelse(DealCycle[i, 3:ncol(DealCycle)]<0, 0, DealCycle[i, 3:ncol(DealCycle)])
+    }
+  }
+  EndTime <- subset(DealCycle, DealCycle$Skills=="End")$Time
+  DealCycle <- DealCycle[DealCycle$Time <= EndTime, ]
+  
+  ## Salamander Mischief
+  DC2 <- data.frame()
+  for(i in 1:nrow(DealCycle)) {
+    if(DealCycle$Skills[i]=="SalamanderMischief") {
+      if(nrow(DC2)==0) {
+        DC2 <- DealCycle[i, ]
+        for(j in 1:95) {
+          DC2 <- rbind(DC2, DealCycle[i, ])
+        }
+      } else {
+        for(j in 1:96) {
+          DC2 <- rbind(DC2, DealCycle[i, ])
+        }
+      }
+      MischiefStack <- 1
+      for(j in 94:0) {
+        DC2$Time[(nrow(DC2)-j)] <- DC2$Time[(nrow(DC2)-j-1)] + ifelse(MischiefStack!=0, 600, 1000)
+        MischiefStack <- MischiefStack + 1
+        MischiefStack <- ifelse(MischiefStack==12, 0, MischiefStack)
+      }
+    }
+  }
+  DC2$Skills <- "SalamanderMischiefATK"
+  DealCycle <- rbind(DealCycle, DC2)
+  DealCycle <- DealCycle[order(DealCycle$Time), ] 
+  rownames(DealCycle) <- 1:nrow(DealCycle)
+  for(i in 1:nrow(DealCycle)) {
+    if("SalamanderMischiefATK"==DealCycle[i, 1]) {
+      DealCycle[i, 3:ncol(DealCycle)] <- DealCycle[i-1, 3:ncol(DealCycle)] - (DealCycle[i, 2] - DealCycle[i-1, 2])
+      DealCycle[i, 3:ncol(DealCycle)] <- ifelse(DealCycle[i, 3:ncol(DealCycle)]<0, 0, DealCycle[i, 3:ncol(DealCycle)])
+    }
+  }
+  EndTime <- subset(DealCycle, DealCycle$Skills=="End")$Time
+  DealCycle <- DealCycle[DealCycle$Time <= EndTime, ]
+  
+  
+  ## Mischief AfterBuff
+  for(i in 1:nrow(DealCycle)) {
+    if(DealCycle$Skills[i]=="SalamanderMischiefATK" & DealCycle$SalamanderMischief[i]==200) {
+      DealCycle$SalamanderMischiefAfter[i] <- 30200 + General$General$Serverlag * 1000
+    }
+  }
+  for(i in 2:nrow(DealCycle)) {
+    if(DealCycle$SalamanderMischiefAfter[i-1] > 0) {
+      DealCycle$SalamanderMischiefAfter[i] <- DealCycle$SalamanderMischiefAfter[i-1] - (DealCycle$Time[i] - DealCycle$Time[i-1])
+      DealCycle$SalamanderMischiefAfter[i] <- ifelse(DealCycle$SalamanderMischiefAfter[i]<0, 0, DealCycle$SalamanderMischiefAfter[i])
+    }
+  }
+  for(i in 1:nrow(DealCycle)) {
+    if(DealCycle$SalamanderMischiefAfter[i] > 30000) {
+      DealCycle$SalamanderMischiefAfter[i] <- 0
+    }
+  }
+  
+  
+  ## Mischief Stack
+  SMStack <- 0 ; ATKTimes <- 0
+  for(i in 1:nrow(DealCycle)) {
+    if(DealCycle$Skills[i]=="SalamanderMischiefATK") {
+      DealCycle$SalamanderMischiefStack[i] <- SMStack
+      SMStack <- SMStack + 1
+      SMStack <- min(SMStack, 15 + GetCoreLv(FlameWizardCore, "SalamanderMischief"))
+      ATKTimes <- ATKTimes + 1
+      SMStack <- ifelse(ATKTimes==96, 0, SMStack)
+      ATKTimes <- ifelse(ATKTimes==96, 0, ATKTimes)
+    }
+  }
+  
+  
+  ## Spider In Mirror, Phalanx
+  DealCycle <- DCSummonedATKs(DealCycle, Skill=c("CygnusPhalanx"), SummonedFinal)
+  DealCycle <- DCSpiderInMirror(DealCycle, SummonedFinal)
+  
+  
+  ## Overload Mana
+  for(i in 1:nrow(DealCycle)) {
+    if(max(DealCycle$Skills[i]==c("OrbitalFlame", "DragonSlave", "DragonSlaveLast", "Infernorise", "BlazingOrbitalFlame", 
+                                  "FlameDischargeLion2", "FlameDischargeLion3", "FlameDischargeLion4", "FlameDischargeFox2", "FlameDischargeFox3", "FlameDischargeFox4", 
+                                  "InfinityFlameCircleTick", "SalamanderMischiefATK", "CygnusPhalanx", "BlazingExtinction"))==1) {
+      DealCycle$OverloadMana[i] <- 1
+    }
+  }
+  
+  
+  ## Ignition Effect
+  for(i in 2:nrow(DealCycle)) {
+    if(max(DealCycle$Skills[i]==c("BlazingOrbitalFlame", "OrbitalFlame", "InfinityFlameCircleTick", "BlazingExtinction"))==1) {
+      if(max(0, DealCycle$IgnitionEffect[i-1] - (DealCycle$Time[i] - DealCycle$Time[i-1]))==0) {
+        DealCycle$IgnitionEffect[i] <- 10000
+      } else {
+        DealCycle$IgnitionEffect[i] <- max(0, DealCycle$IgnitionEffect[i-1] - (DealCycle$Time[i] - DealCycle$Time[i-1]))
+      }
+    } else if(max(DealCycle$Skills[i]==c("DragonSlaveLast", "Infernorise"))==1) {
+      DealCycle$IgnitionEffect[i] <- 1
+    } else {
+      DealCycle$IgnitionEffect[i] <- max(0, DealCycle$IgnitionEffect[i-1] - (DealCycle$Time[i] - DealCycle$Time[i-1]))
+    }
+  }
+  return(DealCycle)
+}
+
+
+FlameWizardDealCycle <- FlameWizardCycle(PreDealCycle=FlameWizardDealCycle, 
+                                         ATKFinal=ATKFinal,
+                                         BuffFinal=BuffFinal,
+                                         SummonedFinal=SummonedFinal, 
+                                         Spec=FlameWizardSpec)
+FlameWizardDealCycle <- FlameWizardAddATK(DealCycle=FlameWizardDealCycle, 
+                                          ATKFinal=ATKFinal,
+                                          SummonedFinal=SummonedFinal, 
+                                          FlameWizardCore=FlameWizardCore)
+FlameWizardDealCycle <- BlessofCygnusCycle(FlameWizardDealCycle, 4000, General$General$Serverlag, GetCoreLv(FlameWizardCore, "BlessofCygnus"))
+FlameWizardDealCycleReduction <- DealCycleReduction(FlameWizardDealCycle, c("BlessofCygnusBDR", "SalamanderMischiefStack"))
+
+Idx1 <- c() ; Idx2 <- c()
+for(i in 1:length(PotentialOpt)) {
+  if(names(PotentialOpt)[i]==DPMCalcOption$SpecSet) {
+    Idx1 <- i
+  }
+}
+for(i in 1:nrow(PotentialOpt[[Idx1]])) {
+  if(rownames(PotentialOpt[[Idx1]])[i]=="FlameWizard") {
+    Idx2 <- i
+  }
+}
+if(DPMCalcOption$Optimization==T) {
+  FlameWizardSpecOpt1 <- Optimization1(FlameWizardDealCycleReduction, ATKFinal, BuffFinal, SummonedFinal, FlameWizardSpec, FlameWizardUnionRemained, 
+                                       NotBuffCols=c("BlessofCygnusBDR", "SalamanderMischiefStack"), NotBuffColOption=c("BDR", "FDR"))
+  PotentialOpt[[Idx1]][Idx2, ] <- FlameWizardSpecOpt1[1, 1:3]
+} else {
+  FlameWizardSpecOpt1 <- PotentialOpt[[Idx1]][Idx2, ]
+}
+FlameWizardSpecOpt <- OptDataAdd(FlameWizardSpec, FlameWizardSpecOpt1, "Potential", FlameWizardBase$CRROver, DemonAvenger=F)
+
+if(DPMCalcOption$Optimization==T) {
+  FlameWizardSpecOpt2 <- Optimization2(FlameWizardDealCycleReduction, ATKFinal, BuffFinal, SummonedFinal, FlameWizardSpecOpt, FlameWizardHyperStatBase, FlameWizardBase$ChrLv, FlameWizardBase$CRROver, 
+                                       NotBuffCols=c("BlessofCygnusBDR", "SalamanderMischiefStack"), NotBuffColOption=c("BDR", "FDR"))
+  HyperStatOpt[[Idx1]][Idx2, c(1, 3:10)] <- FlameWizardSpecOpt2[1, ]
+} else {
+  FlameWizardSpecOpt2 <- HyperStatOpt[[Idx1]][Idx2, ]
+}
+FlameWizardSpecOpt <- OptDataAdd(FlameWizardSpecOpt, FlameWizardSpecOpt2, "HyperStat", FlameWizardBase$CRROver, DemonAvenger=F)
+
+FlameWizardFinalDPM <- DealCalc(FlameWizardDealCycle, ATKFinal, BuffFinal, SummonedFinal, FlameWizardSpecOpt, Collapse=F, 
+                                NotBuffCols=c("BlessofCygnusBDR", "SalamanderMischiefStack"), NotBuffColOption=c("BDR", "FDR"))
+FlameWizardFinalDPMwithMax <- DealCalcWithMaxDMR(FlameWizardDealCycle, ATKFinal, BuffFinal, SummonedFinal, FlameWizardSpecOpt, 
+                                                 NotBuffCols=c("BlessofCygnusBDR", "SalamanderMischiefStack"), NotBuffColOption=c("BDR", "FDR"))
+
+set(get(DPMCalcOption$DataName), as.integer(1), "FlameWizard", sum(na.omit(FlameWizardFinalDPMwithMax)) / (max(FlameWizardDealCycle$Time) / 60000))
+set(get(DPMCalcOption$DataName), as.integer(2), "FlameWizard", sum(na.omit(FlameWizardFinalDPM)) / (max(FlameWizardDealCycle$Time) / 60000) - sum(na.omit(FlameWizardFinalDPMwithMax)) / (max(FlameWizardDealCycle$Time) / 60000))
+
+FlameWizardDealRatio <- DealRatio(FlameWizardDealCycle, FlameWizardFinalDPMwithMax)
+
+FlameWizardDealData <- data.frame(FlameWizardDealCycle$Skills, FlameWizardDealCycle$Time, FlameWizardDealCycle$Restraint4, FlameWizardFinalDPMwithMax)
+colnames(FlameWizardDealData) <- c("Skills", "Time", "R4", "Deal")
+set(get(DPMCalcOption$DataName), as.integer(3), "FlameWizard", Deal_RR(FlameWizardDealData))
+set(get(DPMCalcOption$DataName), as.integer(4), "FlameWizard", Deal_40s(FlameWizardDealData, F, NA, FinishTime=subset(FlameWizardDealData, FlameWizardDealData$Skills=="Restraint4")$Time[1] + 15000))
+
+FlameWizardSpecMean <- SpecMean("FlameWizard", FlameWizardDealCycleReduction, 
+                                DealCalcWithMaxDMR(FlameWizardDealCycleReduction, ATKFinal, BuffFinal, SummonedFinal, FlameWizardSpecOpt, 
+                                                   NotBuffCols=c("BlessofCygnusBDR", "SalamanderMischiefStack"), NotBuffColOption=c("BDR", "FDR")), 
+                                ATKFinal, BuffFinal, SummonedFinal, FlameWizardSpecOpt, 
+                                NotBuffCols=c("BlessofCygnusBDR", "SalamanderMischiefStack"), NotBuffColOption=c("BDR", "FDR"))
