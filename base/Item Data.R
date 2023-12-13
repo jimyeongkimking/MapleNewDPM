@@ -1,8 +1,11 @@
 ## item option data
 # Set Symbol : "1" : Boss, "2" : Black Boss, "3" : Chaos Root Abyss, "4" : Absolabs, "5" : Arcane Shade, "6" : Meister
-# Set Symbol : "0" : None, "7" : MosterPark, "8" : Lucky, "9" : MasterLabel
+# Set Symbol : "0" : None, "7" : MosterPark, "8" : Lucky, "9" : MasterLabel, "10" : Dawn, "11" : Eternal
+# 12월 9일 여명 및 에테르넬 추가 / 칼리 무기도 / 칼리 보조 / 어센틱 심볼 도원경 아르테리아 카르시온 / 시드링 5렙
+
 itemoption <- c("reqlv", "MainStat", "SubStat1", "SubStat2", "MaxHP", "MaxHPP", "ATK", "ATKSub", 
                 "MainStatP", "AllstatP", "Upgrade", "AddOption", "BossItem", "Set", "Superior", "IGR", "BDR", "CRR", "CDMR")
+
 {Silver <- c(110, 5, 5, 5, 0, 0, 2, 2, 0, 0, 2, F, F, 1, F, 0, 0, 0, 0)
 Ipia <- c(120, 5, 5, 5, 200, 0, 2, 2, 0, 0, 2, F, F, 1, F, 0, 0, 0, 0)
 Meister <- c(140, 5, 5, 5, 200, 0, 1, 1, 0, 0, 1, F, F, 6, F, 0, 0, 0, 0)
@@ -10,8 +13,9 @@ DeepDark <- c(130, 20, 20, 20, 0, 1000, 20, 20, 0, 0, 0, F, F, 0, F, 0, 0, 15, 5
 Awake <- c(120, 40, 40, 40, 4000, 0, 25, 25, 0, 0, 0, F, F, 0, F, 0, 0, 0, 0)
 Scarlet <- c(135, 4, 4, 4, 150, 0, 1, 1, 0, 0, 1, F, F, 8, F, 0, 0, 0, 0)
 Seed <- c(110, 4, 4, 4, 0, 0, 4, 4, 0, 0, 0, F, F, 0, F, 0, 0, 0, 0)
+Guadian <- c(160, 5, 5, 5, 200, 0, 2, 2, 0, 0, 2, F, F, 10, F, 0, 0, 0, 0) #12월 9일 가엔링 추가
 Fear <- c(200, 5, 5, 5, 250, 0, 4, 4, 0, 0, 2, F, F, 2, F, 0, 0, 0, 0)
-Ring <- rbind(Silver, Ipia, Meister, DeepDark, Awake, Scarlet, Seed, Fear)
+Ring <- rbind(Silver, Ipia, Meister, DeepDark, Awake, Scarlet, Seed, Guadian, Fear)
 colnames(Ring) <- itemoption
 
 Pink <- c(140, 5, 5, 5, 50, 0, 5, 5, 0, 0, 0, T, T, 1, F, 0, 0, 0, 0)
@@ -21,10 +25,11 @@ colnames(Pocket) <- itemoption
 
 Dominator <- c(140, 20, 20, 20, 0, 10, 3, 3, 0, 0, 5, T, T, 1, F, 0, 0, 0, 0)
 Macanator <- c(120, 10, 10, 10, 250, 0, 1, 1, 0, 0, 2, T, T, 1, F, 0, 0, 0, 0)
+Daybreak <- c(140, 8, 8, 8, 0, 5, 2, 2, 0, 0, 5, T, T, 10, F, 0, 0, 0, 0) #12월 9일 데브펜 추가
 Pain <- c(160, 10, 10, 10, 0, 5, 3, 3, 0, 0, 5, T, T, 2, F, 0, 0, 0, 0)
 Purple <- c(130, 16, 0, 0, 180, 0, 0, 0, 0, 0, 3, T, F, 0, F, 0, 0, 0, 0)
 ChaosHorntail <- c(120, 10, 10, 10, 0, 10, 2, 2, 0, 0, 3, T, F, 1, F, 0, 0, 0, 0)
-Pendant <- rbind(Dominator, Macanator, Pain, Purple, ChaosHorntail)
+Pendant <- rbind(Dominator, Macanator, Daybreak, Pain, Purple, ChaosHorntail)
 colnames(Pendant) <- itemoption
 
 Zakum <- c(150, 18, 18, 18, 150, 0, 1, 1, 0, 0, 3, T, T, 1, F, 0, 0, 0, 0)
@@ -37,24 +42,29 @@ Vellum <- c(140, 23, 23, 23, 0, 0, 1, 1, 0, 0, 11, T, F, 8, F, 0, 0, 0, 0)
 Fafnir <- c(150, 40, 40, 0, 360, 0, 2, 0, 0, 0, 11, T, T, 3, F, 10, 0, 0, 0)
 Absolabs <- c(160, 45, 45, 0, 0, 0, 3, 0, 0, 0, 11, T, T, 4, F, 10, 0, 0, 0)
 Arcane <- c(200, 65, 65, 0, 0, 0, 7, 0, 0, 0, 11, T, T, 5, F, 10, 0, 0, 0)
-Hat <- rbind(Vellum, Fafnir, Absolabs, Arcane)
+Eternal <- c(250, 90, 90, 0, 0, 0, 7, 0, 0, 0, 11, T, T, 5, F, 10, 0, 0, 0)
+Hat <- rbind(Vellum, Fafnir, Absolabs, Arcane, Eternal)
 colnames(Hat) <- itemoption
 
 Condensed <- c(110, 5, 5, 5, 0, 0, 5, 5, 0, 0, 5, T, T, 1, F, 0, 0, 0, 0)
+Twilight <- c(140, 5, 5, 5, 0, 0, 5, 5, 0, 0, 3, T, T, 10, F, 0, 0, 0, 0)
 LCMM <- c(160, 10, 10, 10, 0, 0, 10, 10, 0, 0, 5, T, T, 2, F, 0, 0, 0, 0)
 ShinyRed <- c(130, 3, 3, 0, 0, 0, 3, 3, 0, 0, 1, T, F, 0, F, 0, 0, 0, 0)
-Forehead <- rbind(Condensed, LCMM, ShinyRed)
+Forehead <- rbind(Condensed, Twilight, LCMM, ShinyRed)
 colnames(Forehead) <- itemoption
 
+Aquatic <- c(100, 6, 6, 6, 0, 0, 1, 1, 0, 0, 3, T, T, 1, F, 0, 0, 0, 0)
+Blackbean <- c(135, 7, 7, 7, 0, 0, 1, 1, 0, 0, 5, T, T, 1, F, 0, 0, 0, 0)
 Papulatus <- c(145, 8, 8, 8, 0, 0, 1, 1, 0, 0, 5, T, T, 1, F, 0, 0, 0, 0)
 Demian <- c(160, 15, 15, 15, 0, 0, 3, 3, 0, 0, 3, T, T, 2, F, 0, 0, 0, 0)
-Eyeacc <- rbind(Papulatus, Demian)
+Eyeacc <- rbind(Aquatic, Blackbean, Papulatus, Demian)
 colnames(Eyeacc) <- itemoption
 
 Fafnir <- c(150, 30, 30, 0, 0, 0, 2, 0, 0, 0, 7, T, T, 3, F, 5, 0, 0, 0)
-Clothes <- rbind(Fafnir)
+Eternal<- c(200, 50, 50, 0, 0, 0, 6, 0, 0, 0, 7, T, T, 11, F, 5, 0, 0, 0)
+Clothes <- rbind(Fafnir, Eternal)
 colnames(Clothes) <- itemoption
-Pants <- rbind(Fafnir)
+Pants <- rbind(Fafnir, Eternal)
 colnames(Pants) <- itemoption
 
 Absolabs <- c(160, 20, 20, 0, 0, 0, 5, 0, 0, 0, 7, T, T, 4, F, 0, 0, 0, 0)
@@ -66,12 +76,14 @@ Thea <- c(130, 5, 5, 5, 0, 0, 2, 2, 0, 0, 6, T, T, 1, F, 0, 0, 0, 0)
 Ocean <- c(150, 7, 7, 7, 750, 0, 5, 5, 0, 0, 7, T, T, 0, F, 0, 0, 0, 0)
 Commander <- c(200, 7, 7, 7, 500, 0, 5, 5, 0, 0, 6, T, T, 2, F, 0, 0, 0, 0)
 Meister <- c(140, 5, 5, 5, 500, 0, 4, 4, 0, 0, 6, T, T, 6, F, 0, 0, 0, 0)
-Earings <- rbind(Thea, Ocean, Commander, Meister)
+Estella <- c(160, 7, 7, 7, 300, 0, 2, 2, 0, 0, 6, T, T, 10, F, 0, 0, 0, 0)
+Earings <- rbind(Thea, Ocean, Commander, Meister, Estella)
 colnames(Earings) <- itemoption
 
 Absolabs <- c(160, 14, 14, 14, 0, 0, 10, 10, 0, 0, 1, F, F, 4, F, 0, 0, 0, 0)
 Arcane <- c(200, 35, 35, 35, 0, 0, 20, 20, 0, 0, 1, F, F, 5, F, 0, 0, 0, 0)
-Shoulder <- rbind(Absolabs, Arcane)
+Eternal<- c(200, 51, 51, 51, 0, 0, 28, 0, 0, 0, 1, F, F, 11, F, 0, 0, 0, 0)
+Shoulder <- rbind(Absolabs, Arcane, Eternal)
 colnames(Shoulder) <- itemoption
 
 Absolabs <- c(160, 20, 20, 0, 0, 0, 5, 0, 0, 0, 7, T, T, 4, F, 0, 0, 0, 0)
@@ -81,7 +93,8 @@ colnames(Gloves) <- itemoption
 
 Crystal <- c(130, 10, 10, 10, 0, 0, 5, 5, 0, 0, 0, F, F, 1, F, 0, 0, 0, 0)
 MonsterPark <- c(100, 7, 7, 7, 0, 0, 7, 7, 0, 0, 0, F, F, 7, F, 10, 0, 0, 0)
-Badge <- rbind(Crystal, MonsterPark)
+Creation <- c(200, 15, 15, 15, 0, 0, 10, 10, 0, 0, 0, F, F, 6, F, 0, 0, 0, 0)
+Badge <- rbind(Crystal, MonsterPark, Creation)
 colnames(Badge) <- itemoption
 
 MonsterPark <- c(100, 7, 7, 7, 0, 0, 7, 7, 0, 0, 0, F, F, 7, F, 10, 0, 0, 0)
@@ -97,7 +110,8 @@ colnames(Cape) <- itemoption
 
 Titanium <- c(100, 3, 3, 3, 50, 0, 0, 0, 0, 0, 9, F, F, 0, F, 0, 0, 0, 0)
 LiquidMetal <- c(130, 3, 3, 3, 50, 0, 0, 0, 0, 0, 9, F, F, 0, F, 0, 0, 0, 0)
-Heart <- rbind(Titanium, LiquidMetal)
+Black <- c(120, 50, 50, 50, 100, 0, 77, 0, 0, 0, 0, F, F, 2, F, 30, 30, 0, 0)
+Heart <- rbind(Titanium, LiquidMetal, Black)
 colnames(Heart) <- itemoption
 
 CrystalKey <- c(0, 0, 0, 0, 0, 0, 10, 10, 0, 0, 8, F, F, 0, F, 0, 0, 0, 0) 
@@ -108,7 +122,8 @@ colnames(PetEqip) <- itemoption ## GoldenHammer Unavailable
 RootAbyss <- c(0, 8, 8, 8, 300, 0, 3, 3, 0, 0, 0, F, F, 0, F, 5, 5, 0, 0)
 PinkBean <- c(0, 10, 10, 10, 0, 0, 5, 5, 0, 0, 0, F, F, 0, F, 0, 10, 0, 0)
 MapleExpert <- c(0, 10, 10, 10, 0, 0, 5, 5, 0, 0, 0, F, F, 0, F, 10, 0, 0, 0)
-Title <- rbind(MapleExpert, RootAbyss, PinkBean)
+YePink <- c(0, 20, 20, 20, 0, 0, 10, 10, 0, 0, 0, F, F, 0, F, 0, 10, 0, 0)
+Title <- rbind(MapleExpert, RootAbyss, PinkBean, YePink)
 colnames(Title) <- itemoption
 
 MasterLabelWeapon <- c(0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, F, F, 9, F, 0, 0, 0, 0)
@@ -122,78 +137,393 @@ colnames(MasterLabel) <- itemoption}
 item <- list(Ring, Pocket, Pendant, Belt, Hat, Forehead, Eyeacc, Clothes, Pants, 
              Shoes, Earings, Shoulder, Gloves, Badge, Medal, Cape, Heart, PetEqip, Title, MasterLabel)
 
+#12월 3일 여기까지..
 
 ## Item List
 Items <- c("Ring1", "Ring2", "Ring3", "Ring4", "Pocket", "Pendant1", "Pendant2", "Belt",
            "Hat", "Forehead", "Eyeacc", "Clothes", "Pants", "Shoes", "Earings", "Shoulder", 
            "Gloves", "Badge", "Medal", "Cape", "Heart", "PetEqip1", "PetEqip2", "PetEqip3", "Title", 
            "MasterLabel1", "MasterLabel2", "MasterLabel3", "MasterLabel4", "MasterLabel5")
-{StandardSpecs <- rbind(item[[1]][1, ], item[[1]][3, ], item[[1]][5, ], item[[1]][7, ],
-                       item[[2]][1, ], item[[3]][1, ], item[[3]][2, ], item[[4]][1, ], 
-                       item[[5]][3, ], item[[6]][1, ], item[[7]][1, ], item[[8]][1, ], 
-                       item[[9]][1, ], item[[10]][1, ], item[[11]][1, ], item[[12]][1, ],
-                       item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
-                       item[[17]][1, ], item[[18]][2, ], item[[18]][2, ], item[[18]][2, ],
-                       item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                       item[[20]][4, ], item[[20]][5, ])
-StandardSpecZero <- rbind(item[[1]][1, ], item[[1]][3, ], item[[1]][5, ], item[[1]][7, ],
-                          item[[2]][1, ], item[[3]][1, ], item[[3]][2, ], item[[4]][1, ], 
-                          item[[5]][1, ], item[[6]][1, ], item[[7]][1, ], item[[8]][1, ], 
-                          item[[9]][1, ], item[[10]][1, ], item[[11]][1, ], item[[12]][1, ],
-                          item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
-                          item[[17]][1, ], item[[18]][2, ], item[[18]][2, ], item[[18]][2, ],
-                          item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                          item[[20]][4, ], item[[20]][5, ])
-StandardSpecDemonAvenger <- rbind(item[[1]][1, ], item[[1]][3, ], item[[1]][5, ], item[[1]][7, ],
-                                  item[[2]][1, ], item[[3]][1, ], item[[3]][5, ], item[[4]][1, ], 
-                                  item[[5]][3, ], item[[6]][1, ], item[[7]][1, ], item[[8]][1, ], 
-                                  item[[9]][1, ], item[[10]][1, ], item[[11]][1, ], item[[12]][1, ],
-                                  item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
-                                  item[[17]][1, ], item[[18]][2, ], item[[18]][2, ], item[[18]][2, ],
-                                  item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                                  item[[20]][4, ], item[[20]][5, ])
-LegendrySpecs <- rbind(item[[1]][1, ], item[[1]][3, ], item[[1]][5, ], item[[1]][7, ],
-                       item[[2]][1, ], item[[3]][1, ], item[[3]][4, ], item[[4]][2, ], 
-                       item[[5]][3, ], item[[6]][3, ], item[[7]][1, ], item[[8]][1, ], 
-                       item[[9]][1, ], item[[10]][1, ], item[[11]][2, ], item[[12]][1, ],
-                       item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
-                       item[[17]][1, ], item[[18]][1, ], item[[18]][2, ], item[[18]][2, ],
-                       item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                       item[[20]][4, ], item[[20]][5, ])
-LegendrySpecsZero <- rbind(item[[1]][1, ], item[[1]][3, ], item[[1]][5, ], item[[1]][7, ],
-                           item[[2]][1, ], item[[3]][1, ], item[[3]][4, ], item[[4]][2, ], 
-                           item[[5]][1, ], item[[6]][3, ], item[[7]][1, ], item[[8]][1, ], 
-                           item[[9]][1, ], item[[10]][1, ], item[[11]][2, ], item[[12]][1, ],
-                           item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
-                           item[[17]][1, ], item[[18]][1, ], item[[18]][2, ], item[[18]][2, ],
-                           item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                           item[[20]][4, ], item[[20]][5, ])
-LegendrySpecsDemonAvenger <- rbind(item[[1]][1, ], item[[1]][3, ], item[[1]][5, ], item[[1]][7, ],
-                                   item[[2]][1, ], item[[3]][1, ], item[[3]][4, ], item[[4]][2, ], 
-                                   item[[5]][3, ], item[[6]][3, ], item[[7]][1, ], item[[8]][1, ], 
-                                   item[[9]][1, ], item[[10]][1, ], item[[11]][4, ], item[[12]][1, ],
-                                   item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
-                                   item[[17]][1, ], item[[18]][1, ], item[[18]][2, ], item[[18]][2, ],
-                                   item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                                   item[[20]][4, ], item[[20]][5, ])
-EndSpecs <- rbind(item[[1]][3, ], item[[1]][6, ], item[[1]][8, ], item[[1]][7, ],
-                  item[[2]][2, ], item[[3]][1, ], item[[3]][3, ], item[[4]][3, ],
-                  item[[5]][4, ], item[[6]][2, ], item[[7]][2, ], item[[8]][1, ], 
-                  item[[9]][1, ], item[[10]][2, ], item[[11]][3, ], item[[12]][2, ],
-                  item[[13]][2, ], item[[14]][2, ], item[[15]][1, ], item[[16]][2, ],
-                  item[[17]][2, ], item[[18]][1, ], item[[18]][1, ], item[[18]][1, ],
-                  item[[19]][3, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
-                  item[[20]][4, ], item[[20]][5, ])}
-rownames(StandardSpecs) <- Items
-rownames(StandardSpecZero) <- Items
-rownames(StandardSpecDemonAvenger) <- Items
-rownames(LegendrySpecs) <- Items
-rownames(LegendrySpecsZero) <- Items
-rownames(LegendrySpecsDemonAvenger) <- Items
-rownames(EndSpecs) <- Items
 
+##기준 스펙 및 템세팅 - 12월 4일 기준 완전 개편..
+##StandardSpecs / StandardSpecZero / StandardSpecDemonAvenger / LegendrySpecs / LegendrySpecsZero / LegendrySpecsDemonAvenger 삭제
+##Newbie / Middle / UpperMiddle / UpperMiddleArcane / High / Top / Middle444 / UpperMiddle444 / High444 / NewbieDA / MiddleDA / UpperMiddleDA / UpperMiddleArcaneDA / HighDA / TopDA / EndSpec 추가
 
+#Newbie - 12성 9/10 9보장 1앜 2카 5앱 / 미해방 - 완
+{Newbie <- rbind(item[[1]][1, ], item[[1]][2, ], item[[1]][5, ], item[[1]][5, ],
+                 item[[2]][1, ], item[[3]][1, ], item[[3]][2, ], item[[4]][1, ],
+                 item[[5]][3, ], item[[6]][1, ], item[[7]][1, ], item[[8]][1, ],
+                 item[[9]][1, ], item[[10]][1, ], item[[11]][1, ], item[[12]][1, ],
+                 item[[13]][1, ], item[[14]][1, ], item[[15]][3, ], item[[16]][1, ],
+                 item[[17]][1, ], item[[18]][2, ], item[[18]][2, ], item[[18]][2, ],
+                 item[[19]][1, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+                 item[[20]][4, ], item[[20]][5, ])
+  
+#Middle - 17성 15/4 10 7보장 1앜 2카 5앱 / 미해방 - 완
+Middle <- rbind(item[[1]][3, ], item[[1]][5, ], item[[1]][5, ], item[[1]][7, ],
+                item[[2]][1, ], item[[3]][1, ], item[[3]][2, ], item[[4]][1, ],
+                item[[5]][3, ], item[[6]][2, ], item[[7]][2, ], item[[8]][1, ],
+                item[[9]][1, ], item[[10]][1, ], item[[11]][1, ], item[[12]][1, ],
+                item[[13]][1, ], item[[14]][1, ], item[[15]][3, ], item[[16]][1, ],
+                item[[17]][1, ], item[[18]][2, ], item[[18]][2, ], item[[18]][2, ],
+                item[[19]][1, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+                item[[20]][4, ], item[[20]][5, ])
 
+#UpperMiddle - 18성 21/4 10 5보장 2여명 1앜 2카 5앱 / 미해방 - 완
+UpperMiddle <- rbind(item[[1]][3, ], item[[1]][5, ], item[[1]][5, ], item[[1]][7, ],
+                     item[[2]][1, ], item[[3]][1, ], item[[3]][5, ], item[[4]][2, ],
+                     item[[5]][3, ], item[[6]][2, ], item[[7]][2, ], item[[8]][1, ],
+                     item[[9]][1, ], item[[10]][1, ], item[[11]][5, ], item[[12]][1, ],
+                     item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
+                     item[[17]][1, ], item[[18]][1, ], item[[18]][2, ], item[[18]][2, ],
+                     item[[19]][2, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+                     item[[20]][4, ], item[[20]][5, ])
+
+#UpperMiddleArcane - 18성 21/4 10 5보장 2여명 3카 5앜 / 미해방 - 완
+UpperMiddleArcane <- rbind(item[[1]][3, ], item[[1]][5, ], item[[1]][5, ], item[[1]][7, ],
+                     item[[2]][1, ], item[[3]][1, ], item[[3]][5, ], item[[4]][2, ],
+                     item[[5]][3, ], item[[6]][2, ], item[[7]][2, ], item[[8]][1, ],
+                     item[[9]][1, ], item[[10]][2, ], item[[11]][5, ], item[[12]][2, ],
+                     item[[13]][2, ], item[[14]][1, ], item[[15]][1, ], item[[16]][2, ],
+                     item[[17]][1, ], item[[18]][1, ], item[[18]][2, ], item[[18]][2, ],
+                     item[[19]][2, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+                     item[[20]][4, ], item[[20]][5, ])
+
+#High - 22성 27/4 10 3보장 4여명 4카 5앱 / 해방 - 완
+High <- rbind(item[[1]][3, ], item[[1]][5, ], item[[1]][8, ], item[[1]][7, ],
+              item[[2]][1, ], item[[3]][1, ], item[[3]][3, ], item[[4]][2, ],
+              item[[5]][2, ], item[[6]][2, ], item[[7]][3, ], item[[8]][1, ],
+              item[[9]][1, ], item[[10]][1, ], item[[11]][5, ], item[[12]][1, ],
+              item[[13]][1, ], item[[14]][1, ], item[[15]][1, ], item[[16]][1, ],
+              item[[17]][1, ], item[[18]][1, ], item[[18]][2, ], item[[18]][2, ],
+              item[[19]][4, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+              item[[20]][4, ], item[[20]][5, ])
+
+#Top - 22성 30/8 6 2여명 4칠흑 4카 5앜 / 해방 - 완
+Top <- rbind(item[[1]][3, ], item[[1]][5, ], item[[1]][8, ], item[[1]][7, ],
+             item[[2]][2, ], item[[3]][1, ], item[[3]][3, ], item[[4]][2, ],
+             item[[5]][2, ], item[[6]][3, ], item[[7]][4, ], item[[8]][1, ],
+             item[[9]][1, ], item[[10]][2, ], item[[11]][5, ], item[[12]][2, ],
+             item[[13]][2, ], item[[14]][2, ], item[[15]][1, ], item[[16]][2, ],
+             item[[17]][3, ], item[[18]][1, ], item[[18]][1, ], item[[18]][1, ],
+             item[[19]][4, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+             item[[20]][4, ], item[[20]][5, ])
+
+#Middle444 - 444 중급자 버전 / 미해방 - 완
+Middle444 <- rbind(item[[1]][3, ], item[[1]][5, ], item[[1]][5, ], item[[1]][7, ],
+                   item[[2]][1, ], item[[3]][1, ], item[[3]][2, ], item[[4]][1, ],
+                   item[[5]][1, ], item[[6]][2, ], item[[7]][2, ], item[[8]][1, ],
+                   item[[9]][1, ], item[[10]][1, ], item[[11]][4, ], item[[12]][1, ],
+                   item[[13]][1, ], item[[14]][1, ], item[[15]][3, ], item[[16]][1, ],
+                   item[[17]][1, ], item[[18]][2, ], item[[18]][2, ], item[[18]][2, ],
+                   item[[19]][1, ], item[[20]][1, ], item[[20]][2, ], item[[20]][3, ],
+                   item[[20]][4, ], item[[20]][5, ])
+
+#UpperMiddle444 - 444 중상급자 앱솔 버전 / 미해방 - 완
+UpperMiddle444 <- rbind(item[[1]][3, ],
+                        item[[1]][5, ],
+                        item[[1]][5, ],
+                        item[[1]][7, ],
+                        item[[2]][1, ],
+                        item[[3]][1, ],
+                        item[[3]][5, ],
+                        item[[4]][2, ],
+                        item[[5]][1, ],
+                        item[[6]][2, ],
+                        item[[7]][2, ],
+                        item[[8]][1, ],
+                        item[[9]][1, ],
+                        item[[10]][1, ],
+                        item[[11]][4, ],
+                        item[[12]][1, ],
+                        item[[13]][1, ],
+                        item[[14]][1, ],
+                        item[[15]][1, ],
+                        item[[16]][1, ],
+                        item[[17]][1, ],
+                        item[[18]][1, ],
+                        item[[18]][2, ],
+                        item[[18]][2, ],
+                        item[[19]][2, ],
+                        item[[20]][1, ],
+                        item[[20]][2, ],
+                        item[[20]][3, ],
+                        item[[20]][4, ],
+                        item[[20]][5, ])
+
+#High444 - 444 상급자 버전 / 미해방 - 완
+High444 <- rbind(item[[1]][3, ],
+                 item[[1]][5, ],
+                 item[[1]][8, ],
+                 item[[1]][7, ],
+                 item[[2]][1, ],
+                 item[[3]][1, ],
+                 item[[3]][3, ],
+                 item[[4]][2, ],
+                 item[[5]][1, ],
+                 item[[6]][2, ],
+                 item[[7]][3, ],
+                 item[[8]][1, ],
+                 item[[9]][1, ],
+                 item[[10]][1, ],
+                 item[[11]][4, ],
+                 item[[12]][1, ],
+                 item[[13]][1, ],
+                 item[[14]][1, ],
+                 item[[15]][1, ],
+                 item[[16]][1, ],
+                 item[[17]][1, ],
+                 item[[18]][1, ],
+                 item[[18]][2, ],
+                 item[[18]][2, ],
+                 item[[19]][4, ],
+                 item[[20]][1, ],
+                 item[[20]][2, ],
+                 item[[20]][3, ],
+                 item[[20]][4, ],
+                 item[[20]][5, ])
+
+#NewbieDA - 데벤 뉴비 버전 - 완
+NewbieDA <- rbind(item[[1]][1, ],
+                  item[[1]][1, ],
+                  item[[1]][5, ],
+                  item[[1]][5, ],
+                  item[[2]][1, ],
+                  item[[3]][1, ],
+                  item[[3]][6, ],
+                  item[[4]][1, ],
+                  item[[5]][3, ],
+                  item[[6]][1, ],
+                  item[[7]][1, ],
+                  item[[8]][1, ],
+                  item[[9]][1, ],
+                  item[[10]][1, ],
+                  item[[11]][1, ],
+                  item[[12]][1, ],
+                  item[[13]][1, ],
+                  item[[14]][1, ],
+                  item[[15]][3, ],
+                  item[[16]][1, ],
+                  item[[17]][1, ],
+                  item[[18]][2, ],
+                  item[[18]][2, ],
+                  item[[18]][2, ],
+                  item[[19]][1, ],
+                  item[[20]][1, ],
+                  item[[20]][2, ],
+                  item[[20]][3, ],
+                  item[[20]][4, ],
+                  item[[20]][5, ])
+
+#MiddleDA - 데벤 중급자 버전 - 완
+MiddleDA <- rbind(item[[1]][2, ],
+                  item[[1]][3, ],
+                  item[[1]][5, ],
+                  item[[1]][7, ],
+                  item[[2]][1, ],
+                  item[[3]][1, ],
+                  item[[3]][6, ],
+                  item[[4]][1, ],
+                  item[[5]][3, ],
+                  item[[6]][2, ],
+                  item[[7]][2, ],
+                  item[[8]][1, ],
+                  item[[9]][1, ],
+                  item[[10]][1, ],
+                  item[[11]][2, ],
+                  item[[12]][1, ],
+                  item[[13]][1, ],
+                  item[[14]][1, ],
+                  item[[15]][3, ],
+                  item[[16]][1, ],
+                  item[[17]][1, ],
+                  item[[18]][2, ],
+                  item[[18]][2, ],
+                  item[[18]][2, ],
+                  item[[19]][1, ],
+                  item[[20]][1, ],
+                  item[[20]][2, ],
+                  item[[20]][3, ],
+                  item[[20]][4, ],
+                  item[[20]][5, ])
+
+#UpperMiddleDA - 데벤 중상급자 앱솔 버전 - 완
+UpperMiddleDA <- rbind(item[[1]][3, ],
+                       item[[1]][8, ],
+                       item[[1]][5, ],
+                       item[[1]][7, ],
+                       item[[2]][1, ],
+                       item[[3]][1, ],
+                       item[[3]][3, ],
+                       item[[4]][1, ],
+                       item[[5]][3, ],
+                       item[[6]][2, ],
+                       item[[7]][2, ],
+                       item[[8]][1, ],
+                       item[[9]][1, ],
+                       item[[10]][1, ],
+                       item[[11]][5, ],
+                       item[[12]][1, ],
+                       item[[13]][1, ],
+                       item[[14]][1, ],
+                       item[[15]][1, ],
+                       item[[16]][1, ],
+                       item[[17]][1, ],
+                       item[[18]][1, ],
+                       item[[18]][2, ],
+                       item[[18]][2, ],
+                       item[[19]][1, ],
+                       item[[20]][1, ],
+                       item[[20]][2, ],
+                       item[[20]][3, ],
+                       item[[20]][4, ],
+                       item[[20]][5, ])
+
+#UpperMiddleArcaneDA - 데벤 중상급자 아케인 버전 - 완
+UpperMiddleArcaneDA <- rbind(item[[1]][3, ],
+                             item[[1]][8, ],
+                             item[[1]][5, ],
+                             item[[1]][7, ],
+                             item[[2]][1, ],
+                             item[[3]][1, ],
+                             item[[3]][3, ],
+                             item[[4]][1, ],
+                             item[[5]][2, ],
+                             item[[6]][2, ],
+                             item[[7]][2, ],
+                             item[[8]][1, ],
+                             item[[9]][1, ],
+                             item[[10]][2, ],
+                             item[[11]][5, ],
+                             item[[12]][2, ],
+                             item[[13]][2, ],
+                             item[[14]][1, ],
+                             item[[15]][1, ],
+                             item[[16]][2, ],
+                             item[[17]][1, ],
+                             item[[18]][1, ],
+                             item[[18]][2, ],
+                             item[[18]][2, ],
+                             item[[19]][1, ],
+                             item[[20]][1, ],
+                             item[[20]][2, ],
+                             item[[20]][3, ],
+                             item[[20]][4, ],
+                             item[[20]][5, ])
+
+#HighDA - 데벤 상급자 버전 / 해방 - 완
+HighDA <- rbind(item[[1]][3, ],
+                item[[1]][8, ],
+                item[[1]][5, ],
+                item[[1]][7, ],
+                item[[2]][1, ],
+                item[[3]][1, ],
+                item[[3]][3, ],
+                item[[4]][1, ],
+                item[[5]][2, ],
+                item[[6]][2, ],
+                item[[7]][3, ],
+                item[[8]][1, ],
+                item[[9]][1, ],
+                item[[10]][1, ],
+                item[[11]][4, ],
+                item[[12]][1, ],
+                item[[13]][1, ],
+                item[[14]][1, ],
+                item[[15]][1, ],
+                item[[16]][1, ],
+                item[[17]][1, ],
+                item[[18]][1, ],
+                item[[18]][2, ],
+                item[[18]][2, ],
+                item[[19]][4, ],
+                item[[20]][1, ],
+                item[[20]][2, ],
+                item[[20]][3, ],
+                item[[20]][4, ],
+                item[[20]][5, ])
+
+#TopDA - 데벤 최상급자 버전 / 해방 - 완
+TopDA <- rbind(item[[1]][3, ],
+               item[[1]][8, ],
+               item[[1]][5, ],
+               item[[1]][7, ],
+               item[[2]][2, ],
+               item[[3]][1, ],
+               item[[3]][3, ],
+               item[[4]][1, ],
+               item[[5]][2, ],
+               item[[6]][3, ],
+               item[[7]][4, ],
+               item[[8]][1, ],
+               item[[9]][1, ],
+               item[[10]][2, ],
+               item[[11]][4, ],
+               item[[12]][2, ],
+               item[[13]][2, ],
+               item[[14]][2, ],
+               item[[15]][1, ],
+               item[[16]][2, ],
+               item[[17]][3, ],
+               item[[18]][1, ],
+               item[[18]][2, ],
+               item[[18]][2, ],
+               item[[19]][4, ],
+               item[[20]][1, ],
+               item[[20]][2, ],
+               item[[20]][3, ],
+               item[[20]][4, ],
+               item[[20]][5, ])
+
+#EndSpec - 이론상 최강 스펙 / 해방 - 완
+EndSpec <- rbind(item[[1]][3, ],
+                 item[[1]][8, ],
+                 item[[1]][9, ],
+                 item[[1]][7, ],
+                 item[[2]][2, ],
+                 item[[3]][3, ],
+                 item[[3]][4, ],
+                 item[[4]][3, ],
+                 item[[5]][5, ],
+                 item[[6]][3, ],
+                 item[[7]][4, ],
+                 item[[8]][2, ],
+                 item[[9]][2, ],
+                 item[[10]][2, ],
+                 item[[11]][3, ],
+                 item[[12]][3, ],
+                 item[[13]][2, ],
+                 item[[14]][2, ],
+                 item[[15]][1, ],
+                 item[[16]][2, ],
+                 item[[17]][3, ],
+                 item[[18]][1, ],
+                 item[[18]][1, ],
+                 item[[18]][1, ],
+                 item[[19]][4, ],
+                 item[[20]][1, ],
+                 item[[20]][2, ],
+                 item[[20]][3, ],
+                 item[[20]][4, ],
+                 item[[20]][5, ])}
+
+rownames(Newbie) <- Items
+rownames(Middle) <- Items
+rownames(UpperMiddle) <- Items
+rownames(UpperMiddleArcane) <- Items
+rownames(High) <- Items
+rownames(Top) <- Items
+rownames(Middle444) <- Items
+rownames(UpperMiddle444) <- Items
+rownames(High444) <- Items
+rownames(NewbieDA) <- Items
+rownames(MiddleDA) <- Items
+rownames(UpperMiddleDA) <- Items
+rownames(UpperMiddleArcaneDA) <- Items
+rownames(HighDA) <- Items
+rownames(TopDA) <- Items
+rownames(EndSpec) <- Items
+#여기 원래 뭐 없었나? 안 되면 찾아보자.. 10월 17일 여기까지 완
 
 ## Fafnir
 weaponoption <- c("reqlv", "MainStat", "SubStat1", "SubStat2", "MaxHP", "ATK", "ATKSub", 
@@ -230,13 +560,14 @@ Gun <- c(150, 40, 40, 0, 0, 125, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 5, 2, 1.5)
 Knuckle <- c(150, 40, 40, 0, 0, 128, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 5, 2, 1.7)
 HandCannon <- c(150, 40, 40, 0, 0, 175, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 8, 2, 1.5)
 EnergySword <- c(150, 40, 40, 0, 0, 128, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 5, 1, 1.5)
-SoulShooter <- c(150, 40, 40, 0, 0, 128, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 5, 1, 1.7)}
+SoulShooter <- c(150, 40, 40, 0, 0, 128, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 5, 1, 1.7)
+Chakram <- c(150, 40, 40, 0, 0, 160, 0, 0, 8, T, T, 3, 10, 30, 0, 0, 4, 1, 1.3)}
 Fafnir <- rbind(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
                 Tuner, LongSword, HeavySword, 
                 Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
                 Bow, Crossbow, AncientBow, DualBowgun, BreathShooter, 
                 Wristband, Dagger, Cane, Chain, Fan,
-                Gun, Knuckle, HandCannon, EnergySword, SoulShooter)
+                Gun, Knuckle, HandCannon, EnergySword, SoulShooter, Chakram)
 colnames(Fafnir) <- weaponoption
 
 
@@ -272,13 +603,14 @@ Gun <- c(160, 60, 60, 0, 0, 150, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 5, 2, 1.5)
 Knuckle <- c(160, 60, 60, 0, 0, 154, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 5, 2, 1.7)
 HandCannon <- c(160, 60, 60, 0, 0, 210, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 8, 2, 1.5)
 EnergySword <- c(160, 60, 60, 0, 0, 154, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 5, 1, 1.5)
-SoulShooter <- c(160, 60, 60, 0, 0, 154, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 5, 1, 1.7)}
+SoulShooter <- c(160, 60, 60, 0, 0, 154, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 5, 1, 1.7)
+Chakram <- c(160, 60, 60, 0, 0, 192, 0, 0, 8, T, T, 4, 10, 30, 0, 0, 4, 1, 1.3)}
 Absolabs <- rbind(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
                   Tuner, LongSword, HeavySword, 
                   Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
                   Bow, Crossbow, AncientBow, DualBowgun, BreathShooter, 
                   Wristband, Dagger, Cane, Chain, Fan,
-                  Gun, Knuckle, HandCannon, EnergySword, SoulShooter)
+                  Gun, Knuckle, HandCannon, EnergySword, SoulShooter, Chakram)
 colnames(Absolabs) <- weaponoption
 
 
@@ -314,108 +646,150 @@ Gun <- c(200, 100, 100, 0, 0, 216, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 5, 2, 1.5)
 Knuckle <- c(200, 100, 100, 0, 0, 221, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 5, 2, 1.7)
 HandCannon <- c(200, 100, 100, 0, 0, 302, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 8, 2, 1.5)
 EnergySword <- c(200, 100, 100, 0, 0, 221, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 5, 1, 1.5)
-SoulShooter <- c(200, 100, 100, 0, 0, 221, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 5, 1, 1.7)}
+SoulShooter <- c(200, 100, 100, 0, 0, 221, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 5, 1, 1.7)
+Chakram <- c(200, 100, 100, 0, 0, 276, 0, 0, 8, T, T, 5, 20, 30, 0, 0, 4, 1, 1.3)}
 ArcaneShade <- rbind(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
                      Tuner, LongSword, HeavySword, 
                      Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
                      Bow, Crossbow, AncientBow, DualBowgun, BreathShooter, 
                      Wristband, Dagger, Cane, Chain, Fan,
-                     Gun, Knuckle, HandCannon, EnergySword, SoulShooter)
+                     Gun, Knuckle, HandCannon, EnergySword, SoulShooter, Chakram)
 colnames(ArcaneShade) <- weaponoption
 
+## Genesis
+{Sword <- c(200, 150, 150, 0, 0, 326, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 1, 1.2)
+Hammer <- c(200, 150, 150, 0, 0, 326, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 1, 1.2)
+TwohandSword <- c(200, 150, 150, 0, 0, 340, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.34)
+TwohandAxe <- c(200, 150, 150, 0, 0, 340, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.34)
+TwohandHammer <- c(200, 150, 150, 0, 0, 340, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.34)
+Polarm <- c(200, 100, 100, 0, 0, 264, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 2, 1.49)
+Spear <- c(200, 150, 150, 0, 0, 340, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.34)
+GuntletRevolver <- c(200, 150, 150, 0, 0, 255, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 2, 1.7)
+Desperado <- c(200, 0, 150, 0, 2800, 340, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.3)
+Tuner <- c(200, 150, 150, 0, 0, 340, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 1, 1.3) # WeaponConstant Need to be Checked
+LongSword <- c(200, 150, 150, 0, 0, 337, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.34) # ZeroWeapon
+HeavySword <- c(200, 150, 150, 0, 0, 342, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 8, 2, 1.34) # ZeroWeapon
+Staff <- c(200, 150, 150, 0, 0, 406, 251, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 1, 1)
+Wand <- c(200, 150, 150, 0, 0, 400, 237, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 1, 1)
+ShiningLord <- c(200, 150, 150, 0, 0, 400, 237, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 1, 1.2)
+MagicGuntlet <- c(200, 150, 150, 0, 0, 400, 237, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 1, 1.2)
+ESPLimiter <- c(200, 150, 150, 0, 0, 400, 237, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 1, 1.2)
+Bow <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.3)
+Crossbow <- c(200, 150, 150, 0, 0, 326, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.35)
+AncientBow <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.3)
+DualBowgun <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 6, 2, 1.3)
+BreathShooter <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 2, 1.3)
+Wristband <-c(200, 150, 150, 0, 0, 172, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 2, 1.75)
+Dagger <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 1, 1.3)
+Cane <- c(200, 150, 150, 0, 0, 326, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 1, 1.3)
+Chain <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 1, 1.3)
+Fan <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 1, 1.3)
+Gun <- c(200, 150, 150, 0, 0, 249, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 2, 1.5)
+Knuckle <- c(200, 150, 150, 0, 0, 255, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 2, 1.7)
+HandCannon <- c(200, 150, 150, 0, 0, 348, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 8, 2, 1.5)
+EnergySword <- c(200, 150, 150, 0, 0, 255, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 1, 1.5)
+SoulShooter <- c(200, 150, 150, 0, 0, 255, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 5, 1, 1.7)
+Chakram <- c(200, 150, 150, 0, 0, 318, 0, 0, 8, T, T, 8, 20, 30, 0, 0, 4, 1, 1.3)}
+Genesis <- rbind(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
+                     Tuner, LongSword, HeavySword, 
+                     Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
+                     Bow, Crossbow, AncientBow, DualBowgun, BreathShooter, 
+                     Wristband, Dagger, Cane, Chain, Fan,
+                     Gun, Knuckle, HandCannon, EnergySword, SoulShooter, Chakram)
+colnames(Genesis) <- weaponoption
 
 ## Weapon Addoption
-### Tier 4
+### Tier 4 - 2추
 {rm(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
    Tuner, LongSword, HeavySword, 
    Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
    Bow, Crossbow, AncientBow, DualBowgun, BreathShooter, 
    Wristband, Dagger, Cane, Chain, Fan,
    Gun, Knuckle, HandCannon, EnergySword, SoulShooter)
-Sword <- c(53, 79, 136)
-Hammer <- c(53, 79, 136)
-TwohandSword <- c(55, 82, 142)
-TwohandAxe <- c(55, 82, 142)
-TwohandHammer <- c(55, 82, 142)
-Polarm <- c(49, 74, 127)
-Spear <- c(55, 82, 142)
-GuntletRevolver <- c(41, 62, 106)
-Desperado <- c(55, 82, 142)
-Tuner <- c(55, 82, 142)
-LongSword <- c(47, 56, 95)
-HeavySword <- c(47, 56, 95)
-Staff <- c(66, 98, 170)
-Wand <- c(65, 97, 167)
-ShiningLord <- c(65, 97, 167)
-MagicGuntlet <- c(65, 97, 167)
-ESPLimiter <- c(65, 97, 167)
-Bow <- c(52, 77, 133)
-Crossbow <- c(53, 79, 136)
-AncientBow <- c(52, 77, 133)
-DualBowgun <- c(52, 77, 133)
-BreathShooter <- c(52, 77, 133)
-Wristband <- c(28, 42, 72)
-Dagger <- c(52, 77, 133)
-Cane <- c(53, 79, 136)
-Chain <- c(52, 77, 133)
-Fan <- c(52, 77, 133)
-Gun <- c(40, 60, 104)
-Knuckle <- c(41, 62, 106)
-HandCannon <- c(56, 84, 145)
-EnergySword <- c(41, 62, 106)
-SoulShooter <- c(41, 62, 106)}
+Sword <- c(53, 79, 136, 157)
+Hammer <- c(53, 79, 136, 157)
+TwohandSword <- c(55, 82, 142, 164)
+TwohandAxe <- c(55, 82, 142, 164)
+TwohandHammer <- c(55, 82, 142, 164)
+Polarm <- c(49, 74, 127, 146)
+Spear <- c(55, 82, 142, 164)
+GuntletRevolver <- c(41, 62, 106, 123)
+Desperado <- c(55, 82, 142, 164)
+Tuner <- c(55, 82, 142, 164)
+LongSword <- c(47, 56, 95, 110)
+HeavySword <- c(47, 56, 95, 110)
+Staff <- c(66, 98, 170, 195)
+Wand <- c(65, 97, 167, 192)
+ShiningLord <- c(65, 97, 167, 192)
+MagicGuntlet <- c(65, 97, 167, 192)
+ESPLimiter <- c(65, 97, 167, 192)
+Bow <- c(52, 77, 133, 153)
+Crossbow <- c(53, 79, 136, 157)
+AncientBow <- c(52, 77, 133, 153)
+DualBowgun <- c(52, 77, 133, 153)
+BreathShooter <- c(52, 77, 133, 153)
+Wristband <- c(28, 42, 72, 83)
+Dagger <- c(52, 77, 133, 153)
+Cane <- c(53, 79, 136, 157)
+Chain <- c(52, 77, 133, 153)
+Fan <- c(52, 77, 133, 153)
+Gun <- c(40, 60, 104, 120)
+Knuckle <- c(41, 62, 106, 123)
+HandCannon <- c(56, 84, 145, 167)
+EnergySword <- c(41, 62, 106, 123)
+SoulShooter <- c(41, 62, 106, 123)
+Chakram <- c(52, 77, 133, 153)}
 AddoptionTier4 <- rbind(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
                         Tuner, LongSword, HeavySword, 
                         Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
                         Bow, Crossbow, AncientBow, DualBowgun, BreathShooter,
                         Wristband, Dagger, Cane, Chain, Fan,
-                        Gun, Knuckle, HandCannon, EnergySword, SoulShooter)
-colnames(AddoptionTier4) <- c("Fafnir", "Absolabs", "ArcaneShade")
+                        Gun, Knuckle, HandCannon, EnergySword, SoulShooter, Chakram)
+colnames(AddoptionTier4) <- c("Fafnir", "Absolabs", "ArcaneShade", "Genesis")
 
-
-### Tier 5
-{Sword <- c(68, 101, 175)
-Hammer <- c(68, 101, 175)
-TwohandSword <- c(71, 106, 182)
-TwohandAxe <- c(71, 106, 182)
-TwohandHammer <- c(71, 106, 182)
-Polarm <- c(63, 95, 163)
-Spear <- c(71, 106, 182)
-GuntletRevolver <- c(53, 79, 136)
-Desperado <- c(71, 106, 182)
-Tuner <- c(71, 106, 182)
-LongSword <- c(64, 76, 131)
-HeavySword <- c(64, 76, 131)
-Staff <- c(84, 126, 218)
-Wand <- c(83, 124, 214)
-ShiningLord <- c(83, 124, 214)
-MagicGuntlet <- c(83, 124, 214)
-ESPLimiter <- c(83, 124, 214)
-Bow <- c(66, 99, 170)
-Crossbow <- c(68, 101, 175)
-AncientBow <- c(66, 99, 170)
-DualBowgun <- c(66, 99, 170)
-BreathShooter <- c(66, 99, 170)
-Wristband <- c(36, 53, 92)
-Dagger <- c(66, 99, 170)
-Cane <- c(68, 101, 175)
-Chain <- c(66, 99, 170)
-Fan <- c(66, 99, 170)
-Gun <- c(52, 77, 133)
-Knuckle <- c(53, 79, 136)
-HandCannon <- c(72, 108, 186)
-EnergySword <- c(53, 79, 136)
-SoulShooter <- c(53, 79, 136)}
+### Tier 5 - 1추
+{Sword <- c(68, 101, 175, 201)
+Hammer <- c(68, 101, 175, 201)
+TwohandSword <- c(71, 106, 182, 210)
+TwohandAxe <- c(71, 106, 182, 210)
+TwohandHammer <- c(71, 106, 182, 201)
+Polarm <- c(63, 95, 163, 187)
+Spear <- c(71, 106, 182, 210)
+GuntletRevolver <- c(53, 79, 136, 157)
+Desperado <- c(71, 106, 182, 210)
+Tuner <- c(71, 106, 182, 210)
+LongSword <- c(64, 76, 131, 151)
+HeavySword <- c(64, 76, 131, 151)
+Staff <- c(84, 126, 218, 250)
+Wand <- c(83, 124, 214, 246)
+ShiningLord <- c(83, 124, 214, 246)
+MagicGuntlet <- c(83, 124, 214, 246)
+ESPLimiter <- c(83, 124, 214, 246)
+Bow <- c(66, 99, 170, 196)
+Crossbow <- c(68, 101, 175, 201)
+AncientBow <- c(66, 99, 170, 196)
+DualBowgun <- c(66, 99, 170, 196)
+BreathShooter <- c(66, 99, 170, 196)
+Wristband <- c(36, 53, 92, 106)
+Dagger <- c(66, 99, 170, 196)
+Cane <- c(68, 101, 175, 201)
+Chain <- c(66, 99, 170, 196)
+Fan <- c(66, 99, 170, 196)
+Gun <- c(52, 77, 133, 154)
+Knuckle <- c(53, 79, 136, 157)
+HandCannon <- c(72, 108, 186, 215)
+EnergySword <- c(53, 79, 136, 157)
+SoulShooter <- c(53, 79, 136, 157)
+Chakram <- c(66, 99, 170, 196)}
 AddoptionTier5 <- rbind(Sword, Hammer, TwohandSword, TwohandAxe, TwohandHammer, Polarm, Spear, GuntletRevolver, Desperado, 
                         Tuner, LongSword, HeavySword, 
                         Staff, Wand, ShiningLord, MagicGuntlet, ESPLimiter, 
                         Bow, Crossbow, AncientBow, DualBowgun, BreathShooter, 
                         Wristband, Dagger, Cane, Chain, Fan,
-                        Gun, Knuckle, HandCannon, EnergySword, SoulShooter)
-colnames(AddoptionTier5) <- c("Fafnir", "Absolabs", "ArcaneShade")
+                        Gun, Knuckle, HandCannon, EnergySword, SoulShooter, Chakram)
+colnames(AddoptionTier5) <- c("Fafnir", "Absolabs", "ArcaneShade", "Genesis")
 
-
-## SubWeapon
+## SubWeapon - 확인이 필요함 추가할 거 더 없나?
 SubWeaponOption <- c("reqlv", "MainStat", "SubStat1", "SubStat2", "MaxHP", "ATK", "ATKSub", 
                      "AllstatP", "Upgrade", "AddOption", "BossItem", "Set", "IGR", "BDR", "CRR", "CDMR")
 {HeroMedal <- c(100, 10, 10, 0, 0, 3, 0, 0, 0, F, F, 0, 0, 0, 0, 0)
@@ -463,18 +837,19 @@ Seonchu <- c(100, 10, 10, 0, 0, 3, 0, 0, 0, F, F, 0, 0, 0, 0, 0)
 FafnirZeroSubWeapon <- c(170, 0, 0, 0, 0, 0, 0, 0, 0, F, F, 0, 10, 30, 0, 0)
 AbsolabsZeroSubWeapon <- c(180, 0, 0, 0, 0, 0, 0, 0, 0, F, F, 0, 10, 30, 0, 0)
 ArcaneShadeZeroSubWeapon <- c(200, 0, 0, 0, 0, 0, 0, 0, 0, F, F, 0, 20, 30, 0, 0)
-ChessPiece <- c(100, 10, 10, 0, 0, 3, 0, 0, 0, F, F, 0, 0, 0, 0, 0)}
+ChessPiece <- c(100, 10, 10, 0, 0, 3, 0, 0, 0, F, F, 0, 0, 0, 0, 0)
+HexSeeker <- c(100, 10, 10, 0, 0, 3, 0, 0, 0, F, F, 0, 0, 0, 0, 0)}
 SubWeapon <- rbind(HeroMedal, Rosario, DarkKnightChain, FPGrimoire, TCGrimoire, BishopGrimoire, ArrowFeather, Thimble, Relic, 
                    DaggerSheath, Talisman, FafnirBlade, AbsolabsBlade, ArcaneShadeBlade, ViperWristband, Sight, PowderKeg, 
                    SoulShield, CygnusKnightsJewel, AranWeight, EvanDocument, Orb, MagicArrow, Card, FoxBead, 
                    BlasterGunpowder, MagicBead, Arrowhead, Magnum, Controller, DemonSlayerForceShield, DemonAvengerForceShield, 
                    RuinForceShield, DragonEssence, Transmitter, SoulRing, Bracelet, MagicWing, PathofAbyss, Seonchu, 
-                   FafnirZeroSubWeapon, AbsolabsZeroSubWeapon, ArcaneShadeZeroSubWeapon, ChessPiece, Norigae, WeaponBelt)
+                   FafnirZeroSubWeapon, AbsolabsZeroSubWeapon, ArcaneShadeZeroSubWeapon, ChessPiece, Norigae, WeaponBelt, HexSeeker)
 colnames(SubWeapon) <- SubWeaponOption
 SubWeapon <- data.frame(SubWeapon)
 
 
-## Emblem
+## Emblem - 칼리, 미트라 추가
 SubWeaponOption <- c("reqlv", "MainStat", "SubStat1", "SubStat2", "MaxHP", "ATK", "ATKSub", 
                      "AllstatP", "Upgrade", "AddOption", "BossItem", "Set", "IGR", "BDR", "CRR", "CDMR")
 {MapleLeaf <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
@@ -492,13 +867,16 @@ Abyss <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
 Pungsusa <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
 Cheonjiin <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
 Time <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
-Kinesis <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)}
-Emblem <- rbind(MapleLeaf, Heroes, Cygnus, Resistance, Demon, Dragon, Angel, Agent, Knight, Crystal, Abyss, Cheonjiin, Time, Kinesis, Hitman, Pungsusa)
+Kinesis <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
+Chaser <- c(100, 10, 10, 10, 0, 2, 2, 0, 0, F, F, 0, 0, 0, 0, 0)
+Mitra <- c(200, 40, 40, 0, 0, 5, 5, 0, 0, F, F, 2, 0, 0, 0, 0)}
+Emblem <- rbind(MapleLeaf, Heroes, Cygnus, Resistance, Demon, Dragon, Angel, Agent, Knight, Crystal, Abyss, Cheonjiin, Time, Kinesis, Hitman, Pungsusa, Chaser, Mitra)
 colnames(Emblem) <- SubWeaponOption
 Emblem <- data.frame(Emblem)
 
+##10월 22일 여기까지
 
-## Set Option
+## Set Option - 칠흑 8 9셋 추가, 세트 옵션 변경, 여명 추가, 에테르넬 추가
 {itemoption <- c("reqlv", "MainStat", "SubStat1", "SubStat2", "MaxHP", "MaxHPP", "ATK", "ATKSub", 
                  "MainStatP", "AllstatP", "Upgrade", "AddOption", "BossItem", "Set", "Superior", "IGR", "BDR", "CRR", "CDMR")
   B1 <- rep(0, 19)
@@ -519,7 +897,9 @@ Emblem <- data.frame(Emblem)
   BB5 <- c(0, 15, 15, 15, 375, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0)
   BB6 <- c(0, 15, 15, 15, 375, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
   BB7 <- c(0, 15, 15, 15, 375, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5)
-  BlackBossAccSet <- data.frame(rbind(BB1, BB2, BB3, BB4, BB5, BB6, BB7))
+  BB8 <- c(0, 15, 15, 15, 375, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0)
+  BB9 <- c(0, 15, 15, 15, 375, 0, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5)
+  BlackBossAccSet <- data.frame(rbind(BB1, BB2, BB3, BB4, BB5, BB6, BB7, BB8, BB9))
   
   C1 <- rep(0, 19)
   C2 <- c(0, 20, 20, 0, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -528,19 +908,19 @@ Emblem <- data.frame(Emblem)
   ChaosRootAbyssSet <- data.frame(rbind(C1, C2, C3, C4))
   
   AB1 <- rep(0, 19)
-  AB2 <- c(0, 0, 0, 0, 1500, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  AB3 <- c(0, 30, 30, 30, 0, 0, 25, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  AB4 <- c(0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0)
-  AB5 <- c(0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0)
+  AB2 <- c(0, 0, 0, 0, 1500, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 변경
+  AB3 <- c(0, 30, 30, 30, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 변경
+  AB4 <- c(0, 0, 0, 0, 0, 0, 25, 25, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0) ##10월 23일 변경
+  AB5 <- c(0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 변경
   AB6 <- c(0, 0, 0, 0, 0, 20, 20, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
   AB7 <- c(0, 0, 0, 0, 0, 0, 20, 20, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0)
   AbsolabsSet <- data.frame(rbind(AB1, AB2, AB3, AB4, AB5, AB6, AB7))
   
   AR1 <- rep(0, 19)
-  AR2 <- c(0, 0, 0, 0, 2000, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  AR3 <- c(0, 50, 50, 50, 0, 0, 35, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  AR4 <- c(0, 0, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0)
-  AR5 <- c(0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0)
+  AR2 <- c(0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 변경
+  AR3 <- c(0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0) ##10월 23일 변경
+  AR4 <- c(0, 50, 50, 50, 0, 0, 35, 35, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 변경
+  AR5 <- c(0, 0, 0, 0, 2000, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 변경
   AR6 <- c(0, 0, 0, 0, 0, 30, 30, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
   AR7 <- c(0, 0, 0, 0, 0, 0, 30, 30, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0)
   ArcaneShadeSet <- data.frame(rbind(AR1, AR2, AR3, AR4, AR5, AR6, AR7))
@@ -560,10 +940,25 @@ Emblem <- data.frame(Emblem)
   ML3 <- c(0, 5, 5, 5, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
   ML4 <- rep(0, 19)
   ML5 <- c(0, 10, 10, 10, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-  MasterLabelSet <- data.frame(rbind(ML1, ML2, ML3, ML4, ML5))}
+  MasterLabelSet <- data.frame(rbind(ML1, ML2, ML3, ML4, ML5))
+  
+  D1 <- rep(0, 19)
+  D2 <- c(0, 10, 10, 10, 250, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 추가
+  D3 <- c(0, 10, 10, 10, 250, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) ##10월 23일 추가
+  D4 <- c(0, 10, 10, 10, 250, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0) ##10월 23일 추가
+  DawnAccset <- data.frame(rbind(D1, D2, D3, D4)) ##10월 23일 추가
+  
+  ET1 <- rep(0, 19)
+  ET2 <- c(0, 0, 0, 0, 2500, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 추가
+  ET3 <- c(0, 50, 50, 50, 0, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 추가
+  ET4 <- c(0, 0, 0, 0, 0, 15, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 추가
+  ET5 <- c(0, 0, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0) ##10월 23일 추가
+  ET6 <- c(0, 0, 0, 0, 0, 15, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0) ##10월 23일 추가
+  ET7 <- c(0, 50, 50, 50, 2500, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 추가
+  ET8 <- c(0, 0, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0) ##10월 23일 추가
+  EternalSet <- data.frame(rbind(ET1, ET2, ET3, ET4, ET5, ET6, ET7, ET8))}
 SetOptions <- list(BossAccSet, BlackBossAccSet, ChaosRootAbyssSet, AbsolabsSet, ArcaneShadeSet, 
-                   MeisterSet, MonsterParkSet, NA, MasterLabelSet)
-
+                   MeisterSet, MonsterParkSet, NA, MasterLabelSet, DawnAccset, EternalSet)
 
 ## Pet Set Option Function
 {itemoption <- c("reqlv", "MainStat", "SubStat1", "SubStat2", "MaxHP", "MaxHPP", "ATK", "ATKSub", 
@@ -579,40 +974,41 @@ SetOptions <- list(BossAccSet, BlackBossAccSet, ChaosRootAbyssSet, AbsolabsSet, 
   LunarPetitSet <- data.frame(rbind(P1, P2, P3))}
 PetSetOptions <- list(LunarDreamSet, LunarPetitSet)
 
-
-## Final Item Specs (Standard)
-{SpecSet1 <- StandardSpecs
+##여기선 함수 세팅이 필요하므로, 나중에 다시 파악하는 것으로 한다. 12월 7일
+##Newbie / Middle / UpperMiddle / UpperMiddleArcane / High / Top / Middle444 / UpperMiddle444 / High444 / NewbieDA / MiddleDA / UpperMiddleDA / UpperMiddleArcaneDA / HighDA / TopDA / EndSpec
+## Final Item Specs (Newbie) - 데이터프레임 기준 밑으로 아이템 정렬 순서 / SpecSet1[1, 11] 여기에서 11은 뭘 의미? / c(3, 3, 3) 숫자의 개수는 업횟인 거 알겠는데, 3은 뭐지?
+{SpecSet1 <- Newbie
 Up <- data.frame()
-Up <- rbind(Up, Upgrade(SpecSet1[1, 1], "Acc", SpecSet1[1, 11], T, c(3, 3, 3), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[2, 1], "Acc", SpecSet1[2, 11], T, c(3, 3), 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, DominatorUpgrade(rep(1, 6)))
-Up <- rbind(Up, Upgrade(SpecSet1[7, 1], "Acc", SpecSet1[7, 11], T, c(3, 3, 3), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[8, 1], "Acc", SpecSet1[8, 11], T, c(3, 3, 3, 3), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[9, 1], "Armor", SpecSet1[9, 11], T, c(rep(1, 12)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[10, 1], "Acc", SpecSet1[10, 11], T, c(rep(3, 6)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[11, 1], "Acc", SpecSet1[11, 11], T, c(rep(3, 6)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[12, 1], "Armor", SpecSet1[12, 11], T, c(rep(1, 8)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[13, 1], "Armor", SpecSet1[13, 11], T, c(rep(1, 8)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[14, 1], "Armor", SpecSet1[14, 11], T, c(rep(1, 8)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[15, 1], "Acc", SpecSet1[15, 11], T, c(rep(3, 7)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[16, 1], "Armor", SpecSet1[16, 11], T, c(rep(1, 2)), 0))
-Up <- rbind(Up, Upgrade(SpecSet1[17, 1], "Gloves", SpecSet1[17, 11], T, c(rep(1, 8)), 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, Upgrade(SpecSet1[20, 1], "Armor", SpecSet1[20, 11], T, c(rep(1, 8)), 0))
-Up <- rbind(Up, HeartUpgrade(SpecSet1[21, 11], rep(1, 10)))
-Up <- rbind(Up, PetEqipUpgrade(SpecSet1[22, 11], rep(1, 9)))
-Up <- rbind(Up, PetEqipUpgrade(SpecSet1[23, 11], rep(1, 9)))
-Up <- rbind(Up, PetEqipUpgrade(SpecSet1[24, 11], rep(1, 9)))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
-Up <- rbind(Up, c(0, 0, 0, 0, 0))
+Up <- rbind(Up, Upgrade(SpecSet1[1, 1], "Acc", SpecSet1[1, 11], T, c(3, 3, 3), 0))       #실블링
+Up <- rbind(Up, Upgrade(SpecSet1[2, 1], "Acc", SpecSet1[2, 11], T, c(3, 3, 3), 0))       #고이피
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #이벤링
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #이벤링
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #성배
+Up <- rbind(Up, DominatorUpgrade(rep(1, 6)))                                             #도미
+Up <- rbind(Up, Upgrade(SpecSet1[7, 1], "Acc", SpecSet1[7, 11], T, c(3, 3, 3), 0))       #매커
+Up <- rbind(Up, Upgrade(SpecSet1[8, 1], "Acc", SpecSet1[8, 11], T, c(3, 3, 3, 3), 0))    #분자벨
+Up <- rbind(Up, Upgrade(SpecSet1[9, 1], "Armor", SpecSet1[9, 11], T, c(rep(1, 12)), 0))  #앱솔뚝
+Up <- rbind(Up, Upgrade(SpecSet1[10, 1], "Acc", SpecSet1[10, 11], T, c(rep(3, 6)), 0))   #응축
+Up <- rbind(Up, Upgrade(SpecSet1[11, 1], "Acc", SpecSet1[11, 11], T, c(rep(3, 4)), 0))   #아쿠아틱
+Up <- rbind(Up, Upgrade(SpecSet1[12, 1], "Armor", SpecSet1[12, 11], T, c(rep(1, 8)), 0)) #루타 상의
+Up <- rbind(Up, Upgrade(SpecSet1[13, 1], "Armor", SpecSet1[13, 11], T, c(rep(1, 8)), 0)) #루타 하의
+Up <- rbind(Up, Upgrade(SpecSet1[14, 1], "Armor", SpecSet1[14, 11], T, c(rep(1, 8)), 0)) #앱솔 신발
+Up <- rbind(Up, Upgrade(SpecSet1[15, 1], "Acc", SpecSet1[15, 11], T, c(rep(3, 7)), 0))   #데아
+Up <- rbind(Up, Upgrade(SpecSet1[16, 1], "Armor", SpecSet1[16, 11], T, c(rep(1, 2)), 0)) #앱솔 어깨
+Up <- rbind(Up, Upgrade(SpecSet1[17, 1], "Gloves", SpecSet1[17, 11], T, c(rep(1, 8)), 0))#앱솔 장갑
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #웬투스 뱃지
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #카오스 벨룸 킬러
+Up <- rbind(Up, Upgrade(SpecSet1[20, 1], "Armor", SpecSet1[20, 11], T, c(rep(1, 8)), 0)) #앱솔 망토
+Up <- rbind(Up, HeartUpgrade(SpecSet1[21, 11], rep(1, 10)))                              #티타늄 하트
+Up <- rbind(Up, PetEqipUpgrade(SpecSet1[22, 11], rep(1, 9)))                             #D 펫장비
+Up <- rbind(Up, PetEqipUpgrade(SpecSet1[23, 11], rep(1, 9)))                             #D 펫장비
+Up <- rbind(Up, PetEqipUpgrade(SpecSet1[24, 11], rep(1, 9)))                             #D 펫장비
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #킹 오브 루타비스
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #마라벨 무기
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #마라벨 옷
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #마라벨 망토
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #마라벨 신발
+Up <- rbind(Up, c(0, 0, 0, 0, 0))                                                        #마라벨 모자
 for(i in 1:30) {
   SpecSet1[i, 2] <- SpecSet1[i, 2] + Up[i, 3]
   SpecSet1[i, 3] <- SpecSet1[i, 3] + Up[i, 4]
@@ -622,36 +1018,36 @@ for(i in 1:30) {
 }
 
 Sf <- data.frame()
-Sf <- rbind(Sf, Starforce(SpecSet1[1, 1], F, 10, F, F, SpecSet1[1, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[2, 1], F, 17, F, F, SpecSet1[2, 4]))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, Starforce(SpecSet1[6, 1], F, 17, F, F, SpecSet1[6, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[7, 1], F, 15, F, F, SpecSet1[7, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[8, 1], F, 17, F, F, SpecSet1[8, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[9, 1], F, 17, T, F, SpecSet1[9, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[10, 1], F, 10, F, F, SpecSet1[10, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[11, 1], F, 17, F, F, SpecSet1[11, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[12, 1], F, 17, T, F, SpecSet1[12, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[13, 1], F, 17, T, F, SpecSet1[13, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[14, 1], F, 17, T, F, SpecSet1[14, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[15, 1], F, 17, F, F, SpecSet1[15, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[16, 1], F, 17, T, F, SpecSet1[16, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[17, 1], F, 17, T, T, SpecSet1[17, 4]))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, Starforce(SpecSet1[20, 1], F, 17, T, F, SpecSet1[20, 4]))
-Sf <- rbind(Sf, Starforce(SpecSet1[21, 1], F, 8, F, F, SpecSet1[21, 4]))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
-Sf <- rbind(Sf, c(0, 0, 0, 0, 0))
+Sf <- rbind(Sf, Starforce(SpecSet1[1, 1], F, 10, F, F, SpecSet1[1, 4]))   #실블링
+Sf <- rbind(Sf, Starforce(SpecSet1[2, 1], F, 12, F, F, SpecSet1[2, 4]))   #고이피
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #이벤링
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #이벤링
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #성배
+Sf <- rbind(Sf, Starforce(SpecSet1[6, 1], F, 15, F, F, SpecSet1[6, 4]))   #도미
+Sf <- rbind(Sf, Starforce(SpecSet1[7, 1], F, 12, F, F, SpecSet1[7, 4]))   #매커
+Sf <- rbind(Sf, Starforce(SpecSet1[8, 1], F, 12, F, F, SpecSet1[8, 4]))   #분자벨
+Sf <- rbind(Sf, Starforce(SpecSet1[9, 1], F, 12, T, F, SpecSet1[9, 4]))   #앱솔뚝
+Sf <- rbind(Sf, Starforce(SpecSet1[10, 1], F, 10, F, F, SpecSet1[10, 4])) #응축
+Sf <- rbind(Sf, Starforce(SpecSet1[11, 1], F, 8, F, F, SpecSet1[11, 4]))  #아쿠아틱
+Sf <- rbind(Sf, Starforce(SpecSet1[12, 1], F, 12, T, F, SpecSet1[12, 4])) #루타 상의
+Sf <- rbind(Sf, Starforce(SpecSet1[13, 1], F, 12, T, F, SpecSet1[13, 4])) #루타 하의
+Sf <- rbind(Sf, Starforce(SpecSet1[14, 1], F, 12, T, F, SpecSet1[14, 4])) #앱솔 신발
+Sf <- rbind(Sf, Starforce(SpecSet1[15, 1], F, 12, F, F, SpecSet1[15, 4])) #데아
+Sf <- rbind(Sf, Starforce(SpecSet1[16, 1], F, 12, T, F, SpecSet1[16, 4])) #앱솔 어깨
+Sf <- rbind(Sf, Starforce(SpecSet1[17, 1], F, 12, T, T, SpecSet1[17, 4])) #앱솔 장갑
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #웬투스 뱃지
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #카오스 벨룸 킬러
+Sf <- rbind(Sf, Starforce(SpecSet1[20, 1], F, 12, T, F, SpecSet1[20, 4])) #앱솔 망토
+Sf <- rbind(Sf, Starforce(SpecSet1[21, 1], F, 8, F, F, SpecSet1[21, 4]))  #티타늄 하트
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #D 펫장비
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #D 펫장비
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #D 펫장비
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #킹 오브 루타비스
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #마라벨 무기
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #마라벨 옷
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #마라벨 망토
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #마라벨 신발
+Sf <- rbind(Sf, c(0, 0, 0, 0, 0))                                         #마라벨 모자
 for(i in 1:30) {
   SpecSet1[i, 2] <- SpecSet1[i, 2] + Sf[i, 3]
   SpecSet1[i, 3] <- SpecSet1[i, 3] + Sf[i, 4]
@@ -670,7 +1066,7 @@ for(i in 1:30) {
   SpecSet1[i, 7] <- SpecSet1[i, 7] + Addop[i, 5]
 }
 
-PoYes <- c(1:3, 6:17, 20:21)
+PoYes <- c(1:4, 6:17, 20:21)
 for(i in PoYes) {
   if(i!=17 & i!=9) {
     Po <- Potential(c("U", "E", "E"), c("M", "M", "O"))
@@ -686,6 +1082,8 @@ for(i in PoYes) {
   SpecSet1[i, 7] <- SpecSet1[i, 7] + APo[1, 4]
 }
 }
+
+
 
 ## Final Item Specs (Standard / Zero)
 {SpecSetZero1 <- StandardSpecZero

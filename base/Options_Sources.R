@@ -1,14 +1,14 @@
 source("Base/ChrInfo.R")
 
-## Options Setting (Default)
+## Options Setting (최강)
 DPMCalcOption <- data.frame(SpecSet = "SpecDefault", 
                             ZeroSpecSet = "SpecDefaultZero", 
                             XenonSpecSet = "SpecDefaultXenon_A6S6", 
                             XenonSpecSetAlt = "SpecDefaultXenon_A6A3", 
                             DemonAvengerSpecSet = "SpecDefaultDemonAvenger", 
                             MobSet = "MobDefault", 
-                            MonsterLifeLevel = 2, ## Not a Monster Life Farm Level
-                            WeaponSF = 17, 
+                            MonsterLifeLevel = 2, ## 농장 렙 아님
+                            WeaponSF = 22, ##무기 스타포스
                             DemonAvengerSF = 264, ## 264 : Unique, 330 : Legendry
                             Optimization = F, 
                             OptdataDelete = F,
